@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="USER" EntityNamespace="UserSystemDataClasses" ContextNamespace="UserSystemDataClasses" Class="UserSystemDataClassesDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=TNA17044\SQL_TNA17044;Initial Catalog=USER;Persist Security Info=True;User ID=userdb" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="USERConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TB_APPLICATION" Member="TB_APPLICATIONs">
+    <Type Name="TB_APPLICATION">
+      <Column Name="APP_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="APP_DESC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_APPLICATION_V_RoleInApp_Mapping" Member="V_RoleInApp_Mappings" ThisKey="APP_KEY" OtherKey="APP_KEY" Type="V_RoleInApp_Mapping" />
+      <Association Name="TB_APPLICATION_TB_AUTHEN_APPLICATION" Member="TB_AUTHEN_APPLICATIONs" ThisKey="APP_KEY" OtherKey="APP_KEY" Type="TB_AUTHEN_APPLICATION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_MENU" Member="TB_MENUs">
+    <Type Name="TB_MENU">
+      <Column Name="MENU_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MENU_TITLE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MENU_URL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MENU_POPUP_OPT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MENU_REL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MENU_TOOLTIP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MENU_PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MENU_DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MENU_PARENT_KEY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TB_MENU_TB_MENU" Member="TB_MENUs" ThisKey="MENU_KEY" OtherKey="MENU_PARENT_KEY" Type="TB_MENU" />
+      <Association Name="TB_MENU_V_RoleInMenu_Mapping" Member="V_RoleInMenu_Mappings" ThisKey="MENU_KEY" OtherKey="MENU_KEY" Type="V_RoleInMenu_Mapping" />
+      <Association Name="TB_MENU_TB_RELA_ROLE_MENU" Member="TB_RELA_ROLE_MENUs" ThisKey="MENU_KEY" OtherKey="MENU_KEY" Type="TB_RELA_ROLE_MENU" />
+      <Association Name="TB_MENU_TB_MENU" Member="TB_MENU1" ThisKey="MENU_PARENT_KEY" OtherKey="MENU_KEY" Type="TB_MENU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHO_ACTION" Member="TB_AUTHO_ACTIONs">
+    <Type Name="TB_AUTHO_ACTION">
+      <Column Name="ACTION_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ACTION_DESC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ACTION_V_RoleInPageAndAction_Mapping" Member="V_RoleInPageAndAction_Mappings" ThisKey="ACTION_KEY" OtherKey="ACTION_KEY" Type="V_RoleInPageAndAction_Mapping" />
+      <Association Name="TB_AUTHO_ACTION_TB_RELA_ROLE_PAGE_ACTION" Member="TB_RELA_ROLE_PAGE_ACTIONs" ThisKey="ACTION_KEY" OtherKey="ACTION_KEY" Type="TB_RELA_ROLE_PAGE_ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHO_PAGE" Member="TB_AUTHO_PAGEs">
+    <Type Name="TB_AUTHO_PAGE">
+      <Column Name="PAGE_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PAGE_DESC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_PAGE_V_RoleInPageAndAction_Mapping" Member="V_RoleInPageAndAction_Mappings" ThisKey="PAGE_KEY" OtherKey="PAGE_KEY" Type="V_RoleInPageAndAction_Mapping" />
+      <Association Name="TB_AUTHO_PAGE_TB_RELA_ROLE_PAGE_ACTION" Member="TB_RELA_ROLE_PAGE_ACTIONs" ThisKey="PAGE_KEY" OtherKey="PAGE_KEY" Type="TB_RELA_ROLE_PAGE_ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHO_ROLE" Member="TB_AUTHO_ROLEs">
+    <Type Name="TB_AUTHO_ROLE">
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_DESC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_VALUE" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_CATEGORY_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInCus_Mapping" Member="V_RoleInCus_Mappings" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="V_RoleInCus_Mapping" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInEmp_Mapping" Member="V_RoleInEmp_Mappings" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="V_RoleInEmp_Mapping" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInMenu_Mapping" Member="V_RoleInMenu_Mappings" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="V_RoleInMenu_Mapping" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInPageAndAction_Mapping" Member="V_RoleInPageAndAction_Mappings" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="V_RoleInPageAndAction_Mapping" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInApp_Mapping" Member="V_RoleInApp_Mappings" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="V_RoleInApp_Mapping" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_CIF" Member="TB_RELA_ROLE_CIFs" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_RELA_ROLE_CIF" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_EMP" Member="TB_RELA_ROLE_EMPs" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_RELA_ROLE_EMP" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_MENU" Member="TB_RELA_ROLE_MENUs" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_RELA_ROLE_MENU" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_PAGE_ACTION" Member="TB_RELA_ROLE_PAGE_ACTIONs" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_RELA_ROLE_PAGE_ACTION" />
+      <Association Name="TB_AUTHO_ROLE_TB_AUTHEN_APPLICATION" Member="TB_AUTHEN_APPLICATIONs" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHEN_APPLICATION" />
+      <Association Name="TB_AUTHO_ROLE_CATEGORY_TB_AUTHO_ROLE" Member="TB_AUTHO_ROLE_CATEGORY" ThisKey="ROLE_CATEGORY_KEY" OtherKey="ROLE_CATEGORY_KEY" Type="TB_AUTHO_ROLE_CATEGORY" IsForeignKey="true" />
+      <Type Name="ROLE">
+        <Column Name="ROLE_CATEGORY_DESC" Type="System.String" CanBeNull="false" />
+        <Column Name="ROLE_CATEGORY_PRIORITY" Type="System.Int32" CanBeNull="true" />
+        <Column Name="ROLE_CATEGORY_DEL_FLAG" Type="System.Boolean" CanBeNull="true" />
+      </Type>
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHO_ROLE_CATEGORY" Member="TB_AUTHO_ROLE_CATEGORies">
+    <Type Name="TB_AUTHO_ROLE_CATEGORY">
+      <Column Name="ROLE_CATEGORY_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_CATEGORY_DESC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRIORITY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_CATEGORY_TB_AUTHO_ROLE" Member="TB_AUTHO_ROLEs" ThisKey="ROLE_CATEGORY_KEY" OtherKey="ROLE_CATEGORY_KEY" Type="TB_AUTHO_ROLE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHO_USER" Member="TB_AUTHO_USERs">
+    <Type Name="TB_AUTHO_USER">
+      <Column Name="EMP_ID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMP_TITLE" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="EMP_NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EMP_SURNAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EMP_TITLE_E" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EMP_NAME_E" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EMP_SURNAME_E" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PASSWD" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CREATE_DATE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EXPIRE_DATE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UPDATE_DATE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_SIGN_ON_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LAST_CHANGE_PASS_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_USER_V_RoleInEmp_Mapping" Member="V_RoleInEmp_Mappings" ThisKey="EMP_ID" OtherKey="EMP_ID" Type="V_RoleInEmp_Mapping" />
+      <Association Name="TB_AUTHO_USER_TB_RELA_ROLE_EMP" Member="TB_RELA_ROLE_EMPs" ThisKey="EMP_ID" OtherKey="EMP_ID" Type="TB_RELA_ROLE_EMP" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_RoleInCus_Mapping" Member="V_RoleInCus_Mappings">
+    <Type Name="V_RoleInCus_Mapping">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CIF" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInCus_Mapping" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_RoleInEmp_Mapping" Member="V_RoleInEmp_Mappings">
+    <Type Name="V_RoleInEmp_Mapping">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EMP_ID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInEmp_Mapping" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_USER_V_RoleInEmp_Mapping" Member="TB_AUTHO_USER" ThisKey="EMP_ID" OtherKey="EMP_ID" Type="TB_AUTHO_USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_RoleInMenu_Mapping" Member="V_RoleInMenu_Mappings">
+    <Type Name="V_RoleInMenu_Mapping">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MENU_KEY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInMenu_Mapping" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_MENU_V_RoleInMenu_Mapping" Member="TB_MENU" ThisKey="MENU_KEY" OtherKey="MENU_KEY" Type="TB_MENU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_RoleInPageAndAction_Mapping" Member="V_RoleInPageAndAction_Mappings">
+    <Type Name="V_RoleInPageAndAction_Mapping">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PAGE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ACTION_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInPageAndAction_Mapping" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_PAGE_V_RoleInPageAndAction_Mapping" Member="TB_AUTHO_PAGE" ThisKey="PAGE_KEY" OtherKey="PAGE_KEY" Type="TB_AUTHO_PAGE" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_ACTION_V_RoleInPageAndAction_Mapping" Member="TB_AUTHO_ACTION" ThisKey="ACTION_KEY" OtherKey="ACTION_KEY" Type="TB_AUTHO_ACTION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.V_RoleInApp_Mapping" Member="V_RoleInApp_Mappings">
+    <Type Name="V_RoleInApp_Mapping">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="APP_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_V_RoleInApp_Mapping" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_APPLICATION_V_RoleInApp_Mapping" Member="TB_APPLICATION" ThisKey="APP_KEY" OtherKey="APP_KEY" Type="TB_APPLICATION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_RELA_ROLE_CIF" Member="TB_RELA_ROLE_CIFs">
+    <Type Name="TB_RELA_ROLE_CIF">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CIF" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_CIF" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_RELA_ROLE_EMP" Member="TB_RELA_ROLE_EMPs">
+    <Type Name="TB_RELA_ROLE_EMP">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EMP_ID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_EMP" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_USER_TB_RELA_ROLE_EMP" Member="TB_AUTHO_USER" ThisKey="EMP_ID" OtherKey="EMP_ID" Type="TB_AUTHO_USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_RELA_ROLE_MENU" Member="TB_RELA_ROLE_MENUs">
+    <Type Name="TB_RELA_ROLE_MENU">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MENU_KEY" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_MENU" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+      <Association Name="TB_MENU_TB_RELA_ROLE_MENU" Member="TB_MENU" ThisKey="MENU_KEY" OtherKey="MENU_KEY" Type="TB_MENU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_RELA_ROLE_PAGE_ACTION" Member="TB_RELA_ROLE_PAGE_ACTIONs">
+    <Type Name="TB_RELA_ROLE_PAGE_ACTION">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PAGE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ACTION_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_AUTHO_ACTION_TB_RELA_ROLE_PAGE_ACTION" Member="TB_AUTHO_ACTION" ThisKey="ACTION_KEY" OtherKey="ACTION_KEY" Type="TB_AUTHO_ACTION" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_PAGE_TB_RELA_ROLE_PAGE_ACTION" Member="TB_AUTHO_PAGE" ThisKey="PAGE_KEY" OtherKey="PAGE_KEY" Type="TB_AUTHO_PAGE" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_ROLE_TB_RELA_ROLE_PAGE_ACTION" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TB_AUTHEN_APPLICATION" Member="TB_AUTHEN_APPLICATIONs">
+    <Type Name="TB_AUTHEN_APPLICATION">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="APP_KEY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEL_FLAG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TB_APPLICATION_TB_AUTHEN_APPLICATION" Member="TB_APPLICATION" ThisKey="APP_KEY" OtherKey="APP_KEY" Type="TB_APPLICATION" IsForeignKey="true" />
+      <Association Name="TB_AUTHO_ROLE_TB_AUTHEN_APPLICATION" Member="TB_AUTHO_ROLE" ThisKey="ROLE_KEY" OtherKey="ROLE_KEY" Type="TB_AUTHO_ROLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
