@@ -7,38 +7,38 @@ using System.Web.UI.WebControls;
 
 namespace aspx.manage
 {
-    public partial class ManageUsers : MyPageClass
+    public partial class ManageApps : MyPageClass
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-        protected void UsersSqlDS_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        protected void AppsSqlDS_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
             if (null != e.Command.Parameters["@filterValue"].Value)
             {
                 e.Command.Parameters["@filterValue"].Value = e.Command.Parameters["@filterValue"].Value.ToString().Replace('*', '%').Replace('?', '_');
-            }   
+            }
         }
         protected void All_LinkButt_Click(object sender, EventArgs e)
         {
-            UsersGV.DataSourceID = AllUserSqlDS.ID;
-            UsersGV.DataBind();
+            AppsGV.DataSourceID = AllAppSqlDS.ID;
+            AppsGV.DataBind();
         }
         protected void FindButton_Click(object sender, EventArgs e)
         {
-            UsersGV.DataSourceID = UsersSqlDS.ID;
+            AppsGV.DataSourceID = AppsSqlDS.ID;
 
-            if (SearchByDropDown.SelectedValue == "NAME")
+            if (SearchByDropDown.SelectedValue == "APP DESC")
             {
-                UsersSqlDS.SelectCommand = "P_GetUsersByNameFilter";
+                AppsSqlDS.SelectCommand = "P_GetApplicationByDescFilter";
             }
             else
             {
-                UsersSqlDS.SelectCommand = "P_GetUsersByEmpIdFilter";
+                AppsSqlDS.SelectCommand = "P_GetApplicationByKeyFilter";
             }
 
-            UsersGV.DataBind();
+            AppsGV.DataBind();
         }
     }
 }

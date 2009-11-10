@@ -15,18 +15,6 @@ namespace aspx.manage
         }
         protected void RoleSqlDS_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
-            if (SearchByDropDown.SelectedValue == "ROLE VALUE")
-            {
-                RoleSqlDS.SelectCommand = "P_GetRolesByCategoryAndRoleValue";
-            }
-            else
-            {
-                RoleSqlDS.SelectCommand = "P_GetRolesByCategoryAndRoleDesc";
-            }
-
-            //System.Windows.Forms.MessageBox.Show(RoleSqlDS.SelectCommand);
-            //System.Windows.Forms.MessageBox.Show(e.Command.Parameters["@categoryKey"].Value.ToString());
-            //System.Windows.Forms.MessageBox.Show(e.Command.Parameters["@filterValue"].Value.ToString());
             if (null != e.Command.Parameters["@filterValue"].Value)
             {
                 e.Command.Parameters["@filterValue"].Value = e.Command.Parameters["@filterValue"].Value.ToString().Replace('*', '%').Replace('?', '_');
@@ -40,6 +28,16 @@ namespace aspx.manage
         protected void FindButton_Click(object sender, EventArgs e)
         {
             Roles_GV.DataSourceID = RoleSqlDS.ID;
+
+            if (SearchByDropDown.SelectedValue == "ROLE VALUE")
+            {
+                RoleSqlDS.SelectCommand = "P_GetRolesByCategoryAndRoleValue";
+            }
+            else
+            {
+                RoleSqlDS.SelectCommand = "P_GetRolesByCategoryAndRoleDesc";
+            }
+
             Roles_GV.DataBind();
         }
     }

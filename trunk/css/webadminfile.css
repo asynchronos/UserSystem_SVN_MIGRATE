@@ -499,3 +499,15 @@ a.gridSelectedRowStyle:link
     text-decoration: underline;
     top: -5px;
 }
+.divDetailsWithFontSize
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+}

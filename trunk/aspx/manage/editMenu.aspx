@@ -1,20 +1,13 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/master/MasterPage.master" AutoEventWireup="true"
-    CodeFile="editUser.aspx.cs" Inherits="aspx.manage.EditUser" Culture="th-TH" UICulture="th-TH" %>
+﻿<%@ Page Title="Edit Menu" Language="C#" MasterPageFile="~/master/MasterPage.master" AutoEventWireup="true" CodeFile="editMenu.aspx.cs" Inherits="aspx.manage.EditMenu" %>
 
-<%@ Register Assembly="System.Web.Entity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-    Namespace="System.Web.UI.WebControls" TagPrefix="asp" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="../../css/webadminfile.css" rel="stylesheet" type="text/css" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ScriptPlaceHolder" runat="Server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" 
-        EnableScriptGlobalization="True">
-    </asp:ScriptManager>
+<asp:Content ID="Content2" ContentPlaceHolderID="ScriptPlaceHolder" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
     <div style="text-align: center;">
         <table cellspacing="0" cellpadding="0" border="0" width="90%">
             <tbody>
@@ -24,145 +17,118 @@
                             <tbody>
                                 <tr class="callOutStyleLowLeftPadding">
                                     <td>
-                                        User
+                                        Menu
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="userDetailsWithFontSize" align="center">
-                                        <div style="vertical-align: top;text-align:left;" id="UserDiv">
-                                            <asp:FormView ID="User_FV" runat="server" DataKeyNames="EMP_ID" 
-                                                DataSourceID="User_LinqDS">
+                                    <td class="divDetailsWithFontSize" align="center">
+                                        <div style="vertical-align: top; text-align: left;" id="MenuDiv">
+                                            
+                                            <asp:FormView ID="Menu_FV" runat="server" DataKeyNames="MENU_KEY" 
+                                                DataSourceID="Menu_LinqDS">
                                                 <EditItemTemplate>
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                EMP_ID:
+                                                                MENU_KEY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_IDTextBox" runat="server" Text='<%# Bind("EMP_ID") %>' Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                DEL_FLAG:
-                                                            </td>
-                                                            <td>
-                                                                <asp:CheckBox ID="DEL_FLAGCheckBox" runat="server" Checked='<%# Bind("DEL_FLAG") %>' />
+                                                                <asp:TextBox ID="MENU_KEYTextBox" runat="server" Text='<%# Eval("MENU_KEY") %>'
+                                                                    Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_TITLE:
+                                                                MENU_TITLE:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_TITLETextBox" runat="server" Text='<%# Bind("EMP_TITLE") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_TITLE_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_TITLE_ETextBox" runat="server" Text='<%# Bind("EMP_TITLE_E") %>' />
+                                                                <asp:TextBox ID="MENU_TITLETextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TITLE") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_NAME:
+                                                                MENU_URL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_NAMETextBox" runat="server" Text='<%# Bind("EMP_NAME") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_NAME_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_NAME_ETextBox" runat="server" Text='<%# Bind("EMP_NAME_E") %>' />
+                                                                <asp:TextBox ID="MENU_URLTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_URL") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_SURNAME:
+                                                                MENU_POPUP_OPT:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_SURNAMETextBox" runat="server" Text='<%# Bind("EMP_SURNAME") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_SURNAME_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_SURNAME_ETextBox" runat="server" Text='<%# Bind("EMP_SURNAME_E") %>' />
+                                                                <asp:TextBox ID="MENU_POPUP_OPTTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_POPUP_OPT") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                PASSWD:
+                                                                MENU_REL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="PASSWDTextBox" runat="server" Text='<%# Bind("PASSWD") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMAIL:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMAILTextBox" runat="server" Text='<%# Bind("EMAIL") %>' />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                CREATE_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="CREATE_DATETextBox" runat="server" Text='<%# Eval("CREATE_DATE", "{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                EXPIRE_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EXPIRE_DATETextBox" runat="server" Text='<%# Bind("EXPIRE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>' />
-                                                                <cc1:CalendarExtender ID="EXPIRE_DATETextBox_CalendarExtender" runat="server" Enabled="True"
-                                                                    Format="dd/MM/yyyy HH:mm:ss" PopupButtonID="EXPIRE_DATEImage" TargetControlID="EXPIRE_DATETextBox">
-                                                                </cc1:CalendarExtender>
-                                                                <asp:Image ID="EXPIRE_DATEImage" runat="server" ImageUrl="~/images/Calendar-Logo-16x16-32.ico" />
+                                                                <asp:TextBox ID="MENU_RELTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_REL") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                LAST_SIGN_ON_DATE:
+                                                                MENU_TOOLTIP:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="LAST_SIGN_ON_DATETextBox" runat="server" Text='<%# Eval("LAST_SIGN_ON_DATE", "{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                LAST_CHANGE_PASS_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="LAST_CHANGE_PASS_DATETextBox" runat="server" Text='<%# Bind("LAST_CHANGE_PASS_DATE", "{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:TextBox ID="MENU_TOOLTIPTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TOOLTIP") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                UPDATE_DATE:
+                                                                MENU_PRIORITY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="UPDATE_DATETextBox" runat="server" Text='<%# Bind("UPDATE_DATE", "{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                &nbsp;
-                                                            </td>
-                                                            <td>
-                                                                &nbsp;
+                                                                <asp:TextBox ID="MENU_PRIORITYTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_PRIORITY") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4">
+                                                            <td>
+                                                                MENU_DEL_FLAG:
+                                                            </td>
+                                                            <td>
+                                                                <asp:CheckBox ID="MENU_DEL_FLAGCheckBox" runat="server" 
+                                                                    Checked='<%# Bind("MENU_DEL_FLAG") %>' />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                MENU_PARENT_KEY:
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList ID="MENU_PARENT_DDL" runat="server" 
+                                                                    DataSourceID="MenuParent_SqlDS" DataTextField="MENU_TITLE" 
+                                                                    DataValueField="MENU_KEY" SelectedValue='<%# Bind("MENU_PARENT_KEY") %>'
+                                                                    AppendDataBoundItems="true">
+                                                                    
+                                                                    <asp:ListItem Text="Null" Value=""></asp:ListItem>
+
+                                                                </asp:DropDownList>
+                                                                <asp:SqlDataSource ID="MenuParent_SqlDS" runat="server" 
+                                                                    ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
+                                                                    SelectCommand="P_GetAllMenuWithoutItSelf" SelectCommandType="StoredProcedure">
+                                                                    <SelectParameters>
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" 
+                                                                            Type="Int32" />
+                                                                    </SelectParameters>
+                                                                </asp:SqlDataSource>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
                                                                 <asp:Button ID="UpdateButton" runat="server" Text="Update"
                                                                     CausesValidation="True" CommandName="Update"/>
                                                                 <asp:Button ID="UpdateCancelButton" runat="server" Text="Cancel"
-                                                                    CausesValidation="False" CommandName="Cancel"/>
+                                                                    CausesValidation="False" CommandName="Cancel"/>                                                         
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -171,124 +137,106 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                EMP_ID:
+                                                                MENU_KEY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_IDTextBox" runat="server" Text='<%# Bind("EMP_ID") %>' />
-                                                            </td>
-                                                            <td>
-                                                                DEL_FLAG:
-                                                            </td>
-                                                            <td>
-                                                                <asp:CheckBox ID="DEL_FLAGCheckBox" runat="server" Checked='<%# Bind("DEL_FLAG") %>' />
+                                                                <asp:TextBox ID="MENU_KEYTextBox" runat="server"
+                                                                    Text='<%# Eval("MENU_KEY") %>'
+                                                                    Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_TITLE:
+                                                                MENU_TITLE:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_TITLETextBox" runat="server" Text='<%# Bind("EMP_TITLE") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_TITLE_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_TITLE_ETextBox" runat="server" Text='<%# Bind("EMP_TITLE_E") %>' />
+                                                                <asp:TextBox ID="MENU_TITLETextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TITLE") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_NAME:
+                                                                MENU_URL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_NAMETextBox" runat="server" Text='<%# Bind("EMP_NAME") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_NAME_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_NAME_ETextBox" runat="server" Text='<%# Bind("EMP_NAME_E") %>' />
+                                                                <asp:TextBox ID="MENU_URLTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_URL") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_SURNAME:
+                                                                MENU_POPUP_OPT:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_SURNAMETextBox" runat="server" Text='<%# Bind("EMP_SURNAME") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMP_SURNAME_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_SURNAME_ETextBox" runat="server" Text='<%# Bind("EMP_SURNAME_E") %>' />
+                                                                <asp:TextBox ID="MENU_POPUP_OPTTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_POPUP_OPT") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                PASSWD:
+                                                                MENU_REL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="PASSWDTextBox" runat="server" Text='<%# Bind("PASSWD") %>' />
-                                                            </td>
-                                                            <td>
-                                                                EMAIL:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMAILTextBox" runat="server" Text='<%# Bind("EMAIL") %>' />
+                                                                <asp:TextBox ID="MENU_RELTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_REL") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                CREATE_DATE:
+                                                                MENU_TOOLTIP:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="CREATE_DATETextBox" runat="server" Text='<%# Bind("CREATE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                EXPIRE_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EXPIRE_DATETextBox" runat="server" Text='<%# Bind("EXPIRE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>' />
-                                                                <cc1:CalendarExtender ID="EXPIRE_DATETextBox_CalendarExtender" runat="server" Enabled="True"
-                                                                    Format="dd/MM/yyyy HH:mm:ss" PopupButtonID="EXPIRE_DATEImage" TargetControlID="EXPIRE_DATETextBox">
-                                                                </cc1:CalendarExtender>
-                                                                <asp:Image ID="EXPIRE_DATEImage" runat="server" ImageUrl="~/images/Calendar-Logo-16x16-32.ico" />
+                                                                <asp:TextBox ID="MENU_TOOLTIPTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TOOLTIP") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                LAST_SIGN_ON_DATE:
+                                                                MENU_PRIORITY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="LAST_SIGN_ON_DATETextBox" runat="server" Text='<%# Bind("LAST_SIGN_ON_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                LAST_CHANGE_PASS_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="LAST_CHANGE_PASS_DATETextBox" runat="server" Text='<%# Bind("LAST_CHANGE_PASS_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:TextBox ID="MENU_PRIORITYTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_PRIORITY") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                UPDATE_DATE:
+                                                                MENU_DEL_FLAG:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="UPDATE_DATETextBox" runat="server" Text='<%# Bind("UPDATE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:CheckBox ID="MENU_DEL_FLAGCheckBox" runat="server" 
+                                                                    Checked='<%# Bind("MENU_DEL_FLAG") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4">
+                                                            <td>
+                                                                MENU_PARENT_KEY:
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList ID="MENU_PARENT_DDL" runat="server" 
+                                                                    DataSourceID="MenuParent_SqlDS" DataTextField="MENU_TITLE" 
+                                                                    DataValueField="MENU_KEY" SelectedValue='<%# Bind("MENU_PARENT_KEY") %>'
+                                                                    AppendDataBoundItems="true">
+                                                                    
+                                                                    <asp:ListItem Text="Null" Value=""></asp:ListItem>
+
+                                                                </asp:DropDownList>
+                                                                <asp:SqlDataSource ID="MenuParent_SqlDS" runat="server" 
+                                                                    ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
+                                                                    SelectCommand="P_GetAllMenuWithoutItSelf" SelectCommandType="StoredProcedure">
+                                                                    <SelectParameters>
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" 
+                                                                            Type="Int32" />
+                                                                    </SelectParameters>
+                                                                </asp:SqlDataSource>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
                                                                 <asp:Button ID="InsertButton" runat="server" Text="Insert"
                                                                     CausesValidation="True" CommandName="Insert"/>
                                                                 <asp:Button ID="InsertCancelButton" runat="server" Text="Cancel"
-                                                                    CausesValidation="False" CommandName="Cancel"/>
+                                                                    CausesValidation="False" CommandName="Cancel"/>                                                  
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -297,119 +245,101 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                EMP_ID:
+                                                                MENU_KEY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_IDTextBox" runat="server" Text='<%# Bind("EMP_ID") %>' Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                DEL_FLAG:
-                                                            </td>
-                                                            <td>
-                                                                <asp:CheckBox ID="DEL_FLAGCheckBox" runat="server" Checked='<%# Bind("DEL_FLAG") %>'
-                                                                    Enabled="false" />
+                                                                <asp:TextBox ID="MENU_KEYTextBox" runat="server"
+                                                                    Text='<%# Eval("MENU_KEY") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_TITLE:
+                                                                MENU_TITLE:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_TITLETextBox" runat="server" Text='<%# Bind("EMP_TITLE") %>'
-                                                                    Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                EMP_TITLE_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_TITLE_ETextBox" runat="server" Text='<%# Bind("EMP_TITLE_E") %>'
-                                                                    Enabled="false" />
+                                                                <asp:TextBox ID="MENU_TITLETextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TITLE") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_NAME:
+                                                                MENU_URL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_NAMETextBox" runat="server" Text='<%# Bind("EMP_NAME") %>' Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                EMP_NAME_E:
+                                                                <asp:TextBox ID="MENU_URLTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_URL") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                EMP_SURNAME:
+                                                                MENU_POPUP_OPT:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="EMP_SURNAMETextBox" runat="server" Text='<%# Bind("EMP_SURNAME") %>'
-                                                                    Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                EMP_SURNAME_E:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMP_SURNAME_ETextBox" runat="server" Text='<%# Bind("EMP_SURNAME_E") %>'
-                                                                    Enabled="false" />
+                                                                <asp:TextBox ID="MENU_POPUP_OPTTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_POPUP_OPT") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                PASSWD:
+                                                                MENU_REL:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="PASSWDTextBox" runat="server" Text='<%# Bind("PASSWD") %>' Enabled="false" />
-                                                            </td>
-                                                            <td>
-                                                                EMAIL:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EMAILTextBox" runat="server" Text='<%# Bind("EMAIL") %>' Enabled="false" />
+                                                                <asp:TextBox ID="MENU_RELTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_REL") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                CREATE_DATE:
+                                                                MENU_TOOLTIP:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="CREATE_DATETextBox" runat="server" Text='<%# Bind("CREATE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                EXPIRE_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="EXPIRE_DATETextBox" runat="server" Text='<%# Bind("EXPIRE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:TextBox ID="MENU_TOOLTIPTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_TOOLTIP") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                LAST_SIGN_ON_DATE:
+                                                                MENU_PRIORITY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="LAST_SIGN_ON_DATETextBox" runat="server" Text='<%# Bind("LAST_SIGN_ON_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
-                                                            </td>
-                                                            <td>
-                                                                LAST_CHANGE_PASS_DATE:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="LAST_CHANGE_PASS_DATETextBox" runat="server" Text='<%# Bind("LAST_CHANGE_PASS_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:TextBox ID="MENU_PRIORITYTextBox" runat="server" 
+                                                                    Text='<%# Bind("MENU_PRIORITY") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                UPDATE_DATE:
+                                                                MENU_DEL_FLAG:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="UPDATE_DATETextBox" runat="server" Text='<%# Bind("UPDATE_DATE","{0:dd/MM/yyyy HH:mm:ss}") %>'
-                                                                    Enabled="False" />
+                                                                <asp:CheckBox ID="MENU_DEL_FLAGCheckBox" runat="server" 
+                                                                    Checked='<%# Bind("MENU_DEL_FLAG") %>' Enabled="false" />
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4">
+                                                            <td>
+                                                                MENU_PARENT_KEY:
+                                                            </td>
+                                                            <td>
+                                                                <asp:DropDownList ID="MENU_PARENT_DDL" runat="server" 
+                                                                    DataSourceID="MenuParent_SqlDS" DataTextField="MENU_TITLE" 
+                                                                    DataValueField="MENU_KEY" SelectedValue='<%# Bind("MENU_PARENT_KEY") %>'
+                                                                    Enabled="false" AppendDataBoundItems="true">
+                                                                    
+                                                                    <asp:ListItem Text="Null" Value=""></asp:ListItem>
+                                                                    
+                                                                </asp:DropDownList>
+                                                                <asp:SqlDataSource ID="MenuParent_SqlDS" runat="server" 
+                                                                    ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
+                                                                    SelectCommand="P_GetAllMenuWithoutItSelf" SelectCommandType="StoredProcedure">
+                                                                    <SelectParameters>
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" 
+                                                                            Type="Int32" />
+                                                                    </SelectParameters>
+                                                                </asp:SqlDataSource>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
                                                                 <asp:Button ID="EditButton" runat="server" Text="Edit"
                                                                     CausesValidation="False" CommandName="Edit"/>
                                                             </td>
@@ -417,13 +347,13 @@
                                                     </table>
                                                 </ItemTemplate>
                                             </asp:FormView>
-                                            <asp:LinqDataSource ID="User_LinqDS" runat="server" ContextTypeName="UserSystemDataClasses.UserSystemDataClassesDataContext"
-                                                TableName="TB_AUTHO_USERs" EnableInsert="True" EnableUpdate="True"
-                                                Where="EMP_ID == @EMP_ID"
-                                                OnInserting="User_LinqDS_Inserting" OnInserted="User_LinqDS_Inserted" 
-                                                OnUpdating="User_LinqDS_Updating">
+                                            <asp:LinqDataSource ID="Menu_LinqDS" runat="server" 
+                                                ContextTypeName="UserSystemDataClasses.UserSystemDataClassesDataContext" 
+                                                EnableInsert="True" EnableUpdate="True" TableName="TB_MENUs" 
+                                                Where="MENU_KEY == @MENU_KEY">
                                                 <WhereParameters>
-                                                    <asp:QueryStringParameter Name="EMP_ID" QueryStringField="empId" Type="String" />
+                                                    <asp:QueryStringParameter Name="MENU_KEY" QueryStringField="menuKey" 
+                                                        Type="Int32" />
                                                 </WhereParameters>
                                             </asp:LinqDataSource>
                                         </div>
@@ -443,15 +373,15 @@
                                     </td>
                                 </tr>
                                 <tr valign="top">
-                                    <td height="100%" class="userDetailsWithFontSize">
+                                    <td height="100%" class="divDetailsWithFontSize">
                                         <div style="vertical-align: top;" id="RoleDiv">
-                                            <asp:FormView ID="Role_FV" runat="server" DataSourceID="EmpSqlDS" DataKeyNames="EMP_ID"
+                                            <asp:FormView ID="Role_FV" runat="server" DataSourceID="MenuSqlDS" DataKeyNames="MENU_KEY"
                                                 Width="100%">
                                                 <EditItemTemplate>
                                                     <table id="Table_Roles" runat="server" align="center">
                                                         <tr id="Table_Roles_R1">
                                                             <td id="Table_Roles_R1_C1" colspan="3" align="center">
-                                                                <asp:HiddenField ID="EMP_ID_HF" runat="server" Value='<%# Eval("EMP_ID") %>' />
+                                                                <asp:HiddenField ID="MENU_KEY_HF" runat="server" Value='<%# Eval("MENU_KEY") %>' />
                                                                 <asp:Button ID="Butt_SaveRole" runat="server" Text="Save" OnClick="Butt_SaveRole_Click"
                                                                     Visible="false" />
                                                                 <asp:Button ID="Butt_CancelRole" runat="server" Text="Cancel" OnClick="Butt_CancelRole_Click"
@@ -466,7 +396,7 @@
                                                                     DataTextField="ROLE_CATEGORY_DESC" DataValueField="ROLE_CATEGORY_KEY">
                                                                 </asp:DropDownList>
                                                                 <asp:SqlDataSource ID="DS_RoleCategory" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
-                                                                    SelectCommand="P_GetAllRoleCategory" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                                                                    SelectCommand="P_GetAllRoleCategoryWithoutKey1" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                                                             </td>
                                                         </tr>
                                                         <tr id="Table_Roles_R3">
@@ -476,9 +406,9 @@
                                                                     DataTextField="ROLE_DESC" DataValueField="ROLE_KEY" SelectionMode="Multiple"
                                                                     Height="350px" ToolTip="Not Selected Role"></asp:ListBox>
                                                                 <asp:SqlDataSource ID="DS_NotSelectedRole" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
-                                                                    SelectCommand="P_GetNotSelectedRolesByEmpAndCategory" SelectCommandType="StoredProcedure">
+                                                                    SelectCommand="P_GetNotSelectedRolesByMenuAndCategory" SelectCommandType="StoredProcedure">
                                                                     <SelectParameters>
-                                                                        <asp:QueryStringParameter Name="empId" QueryStringField="empId" Type="String" />
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" Type="Int32" />
                                                                         <asp:ControlParameter ControlID="DDL_RoleCategory" Name="categoryKey" PropertyName="SelectedValue"
                                                                             Type="Int32" />
                                                                     </SelectParameters>
@@ -495,15 +425,15 @@
                                                                     DataTextField="ROLE_DESC" DataValueField="ROLE_KEY" SelectionMode="Multiple"
                                                                     Height="350px" ToolTip="Selected Role"></asp:ListBox>
                                                                 <asp:SqlDataSource ID="DS_SelectedRole" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
-                                                                    SelectCommand="P_GetSelectedRoleByEmpAndCategory" SelectCommandType="StoredProcedure"
-                                                                    UpdateCommand="P_UpdateSelectedRoleInEmp" UpdateCommandType="StoredProcedure" OnUpdating="DS_SelectedRole_Updating">
+                                                                    SelectCommand="P_GetSelectedRoleByMenuAndCategory" SelectCommandType="StoredProcedure"
+                                                                    UpdateCommand="P_UpdateSelectedRoleInMenu" UpdateCommandType="StoredProcedure" OnUpdating="DS_SelectedRole_Updating">
                                                                     <SelectParameters>
-                                                                        <asp:QueryStringParameter Name="empId" QueryStringField="empId" Type="String" />
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" Type="Int32" />
                                                                         <asp:ControlParameter ControlID="DDL_RoleCategory" Name="categoryKey" PropertyName="SelectedValue"
                                                                             Type="Int32" />
                                                                     </SelectParameters>
                                                                     <UpdateParameters>
-                                                                        <asp:Parameter Name="empId" Type="String" />
+                                                                        <asp:Parameter Name="menuKey" Type="String" />
                                                                         <asp:Parameter Name="roles" Type="String" />
                                                                         <asp:Parameter Name="categoryKey" Type="Int32" />
                                                                     </UpdateParameters>
@@ -517,14 +447,15 @@
                                                         <tr>
                                                             <td align="center">
                                                                 <asp:Button ID="Butt_EditRole" runat="server" Text="Edit Role" CommandName="Edit" />
-                                                                <asp:HiddenField ID="EMP_ID_HF" runat="server" Value='<%# Eval("EMP_ID") %>' />
-                                                                <asp:GridView ID="UserRolesGV" runat="server" AutoGenerateColumns="False" CellPadding="4"
+                                                                <asp:HiddenField ID="MENU_KEY_HF" runat="server" Value='<%# Eval("MENU_KEY") %>' />
+                                                                <asp:GridView ID="RolesGV" runat="server" AutoGenerateColumns="False" CellPadding="4"
                                                                     DataSourceID="RoleSqlDS" ForeColor="#333333" AllowPaging="True">
                                                                     <RowStyle BackColor="#EFF3FB" />
                                                                     <Columns>
-                                                                        <asp:BoundField DataField="EMP_ID" HeaderText="EMP_ID" SortExpression="EMP_ID" />
-                                                                        <asp:BoundField DataField="EMP_NAME" HeaderText="EMP_NAME" ReadOnly="True" SortExpression="EMP_NAME" />
-                                                                        <asp:BoundField DataField="EMP_NAME_E" HeaderText="EMP_NAME_E" ReadOnly="True" SortExpression="EMP_NAME_E" />
+                                                                        <asp:BoundField DataField="MENU_KEY" HeaderText="MENU_KEY" SortExpression="MENU_KEY" />
+                                                                        <asp:BoundField DataField="MENU_TITLE" HeaderText="MENU_TITLE" ReadOnly="True" 
+                                                                            SortExpression="MENU_TITLE" />
+                                                                        <asp:BoundField DataField="MENU_URL" HeaderText="MENU_URL" ReadOnly="True" SortExpression="MENU_URL" />
                                                                         <asp:BoundField DataField="ROLE_KEY" HeaderText="ROLE_KEY" InsertVisible="False"
                                                                             ReadOnly="True" SortExpression="ROLE_KEY" />
                                                                         <asp:BoundField DataField="ROLE_DESC" HeaderText="ROLE_DESC" SortExpression="ROLE_DESC" />
@@ -540,9 +471,9 @@
                                                                     <AlternatingRowStyle BackColor="White" />
                                                                 </asp:GridView>
                                                                 <asp:SqlDataSource ID="RoleSqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
-                                                                    SelectCommand="P_SelectRoleAndCategoryByEmpId" SelectCommandType="StoredProcedure">
+                                                                    SelectCommand="P_SelectRoleAndCategoryByMenuKey" SelectCommandType="StoredProcedure">
                                                                     <SelectParameters>
-                                                                        <asp:QueryStringParameter Name="empId" QueryStringField="empId" Type="String" />
+                                                                        <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" Type="Int32" />
                                                                     </SelectParameters>
                                                                 </asp:SqlDataSource>
                                                             </td>
@@ -550,10 +481,10 @@
                                                     </table>
                                                 </ItemTemplate>
                                             </asp:FormView>
-                                            <asp:SqlDataSource ID="EmpSqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
-                                                SelectCommand="SELECT EMP_ID FROM TB_AUTHO_USER WHERE (EMP_ID = @empId)">
+                                            <asp:SqlDataSource ID="MenuSqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
+                                                SelectCommand="SELECT MENU_KEY FROM [TB_MENU] WHERE (MENU_KEY = @menuKey)">
                                                 <SelectParameters>
-                                                    <asp:QueryStringParameter Name="empId" QueryStringField="empId" />
+                                                    <asp:QueryStringParameter Name="menuKey" QueryStringField="menuKey" />
                                                 </SelectParameters>
                                             </asp:SqlDataSource>
                                         </div>
@@ -567,6 +498,7 @@
         </table>
     </div>
     <div style="float:right">
-        <asp:Button ID="Back_Butt" runat="server" Text="Back" PostBackUrl="~/aspx/manage/manageUsers.aspx" />
+        <asp:Button ID="Back_Butt" runat="server" Text="Back" PostBackUrl="~/aspx/manage/manageMenues.aspx" />
     </div>
 </asp:Content>
+

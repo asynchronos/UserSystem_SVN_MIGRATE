@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace aspx.error
+namespace aspx.manage
 {
-    public partial class unauthorized : MyPageClass
+    public partial class ManageMenues : MyPageClass
     {
         protected void Page_Load(object sender, EventArgs e)
         {

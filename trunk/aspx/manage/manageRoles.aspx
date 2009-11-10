@@ -19,11 +19,10 @@
             <tr>
                 <td class="bodyTextLowTopPadding" valign="middle">
                     <asp:Label ID="Category_DDLLabel" runat="server" Text="Category:"></asp:Label>
-                    <asp:DropDownList ID="Category_DDL" runat="server" DataSourceID="CategorySqlDS" 
-                        DataTextField="ROLE_CATEGORY_DESC" DataValueField="ROLE_CATEGORY_KEY">
+                    <asp:DropDownList ID="Category_DDL" runat="server" DataSourceID="CategorySqlDS" DataTextField="ROLE_CATEGORY_DESC"
+                        DataValueField="ROLE_CATEGORY_KEY">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="CategorySqlDS" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
+                    <asp:SqlDataSource ID="CategorySqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
                         SelectCommand="P_GetAllRoleCategory" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                 </td>
             </tr>
@@ -37,7 +36,7 @@
                     &nbsp;
                     <asp:Label ID="ForLabel" runat="server" Text="for:"></asp:Label>
                     <asp:TextBox ID="FilterTextBox" runat="server"></asp:TextBox>
-                    <asp:Button ID="FindButton" runat="server" Text="Find User" OnClick="FindButton_Click" />
+                    <asp:Button ID="FindButton" runat="server" Text="Find Role" OnClick="FindButton_Click" />
                     <br />
                     Wildcard characters * and ? are permitted.
                 </td>
@@ -49,23 +48,23 @@
             </tr>
             <tr>
                 <td>
-                    <asp:GridView ID="Roles_GV" runat="server" AllowPaging="True" 
-                        AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ROLE_KEY" 
-                        DataSourceID="RoleSqlDS" ForeColor="#333333">
+                    <asp:GridView ID="Roles_GV" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+                        CellPadding="4" DataKeyNames="ROLE_KEY" DataSourceID="RoleSqlDS" 
+                        ForeColor="#333333" AllowSorting="True">
                         <RowStyle BackColor="#EFF3FB" />
                         <Columns>
-                            <asp:BoundField DataField="ROLE_KEY" HeaderText="ROLE_KEY" 
-                                InsertVisible="False" ReadOnly="True" SortExpression="ROLE_KEY" />
-                            <asp:BoundField DataField="ROLE_DESC" HeaderText="ROLE_DESC" 
-                                SortExpression="ROLE_DESC" />
-                            <asp:BoundField DataField="ROLE_VALUE" HeaderText="ROLE_VALUE" 
-                                SortExpression="ROLE_VALUE" />
-                            <asp:BoundField DataField="ROLE_CATEGORY_KEY" HeaderText="ROLE_CATEGORY_KEY" 
-                                SortExpression="ROLE_CATEGORY_KEY" />
-                            <asp:BoundField DataField="PRIORITY" HeaderText="PRIORITY" 
-                                SortExpression="PRIORITY" />
-                            <asp:CheckBoxField DataField="DEL_FLAG" HeaderText="DEL_FLAG" 
-                                SortExpression="DEL_FLAG" />
+                            <asp:BoundField DataField="ROLE_KEY" HeaderText="ROLE_KEY" InsertVisible="False"
+                                ReadOnly="True" SortExpression="ROLE_KEY" />
+                            <asp:BoundField DataField="ROLE_DESC" HeaderText="ROLE_DESC" SortExpression="ROLE_DESC" />
+                            <asp:BoundField DataField="ROLE_VALUE" HeaderText="ROLE_VALUE" SortExpression="ROLE_VALUE" />
+                            <asp:BoundField DataField="PRIORITY" HeaderText="PRIORITY" SortExpression="PRIORITY" />
+                            <asp:CheckBoxField DataField="DEL_FLAG" HeaderText="DEL_FLAG" SortExpression="DEL_FLAG" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="EditRole_LinkButt" runat="server" 
+                                        PostBackUrl='<%# Page.ResolveUrl("~/aspx/manage/editRole.aspx")+"?roleKey="+Eval("ROLE_KEY")+"&mode=edit" %>'>Edit Role</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -74,25 +73,28 @@
                         <EditRowStyle BackColor="#2461BF" />
                         <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="RoleSqlDS" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
-                        onselecting="RoleSqlDS_Selecting" SelectCommand="P_GetRolesByCategoryAndRoleValue" 
+                    <asp:SqlDataSource ID="RoleSqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
+                        OnSelecting="RoleSqlDS_Selecting" SelectCommand="P_GetRolesByCategoryAndRoleValue"
                         SelectCommandType="StoredProcedure">
                         <SelectParameters>
-                            <asp:ControlParameter ControlID="Category_DDL" Name="categoryKey" 
-                                PropertyName="SelectedValue" Type="Int32" />
-                            <asp:ControlParameter ControlID="FilterTextBox" Name="filterValue" 
-                                PropertyName="Text" Type="String" />
+                            <asp:ControlParameter ControlID="Category_DDL" Name="categoryKey" PropertyName="SelectedValue"
+                                Type="Int32" />
+                            <asp:ControlParameter ControlID="FilterTextBox" Name="filterValue" PropertyName="Text"
+                                Type="String" />
                         </SelectParameters>
                     </asp:SqlDataSource>
-                    <asp:SqlDataSource ID="AllRolesSqlDS" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
+                    <asp:SqlDataSource ID="AllRolesSqlDS" runat="server" ConnectionString="<%$ ConnectionStrings:USERConnectionString %>"
                         SelectCommand="P_GetAllRolesByCategory" SelectCommandType="StoredProcedure">
                         <SelectParameters>
-                            <asp:ControlParameter ControlID="Category_DDL" Name="categoryKey" 
-                                PropertyName="SelectedValue" Type="Int32" />
+                            <asp:ControlParameter ControlID="Category_DDL" Name="categoryKey" PropertyName="SelectedValue"
+                                Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <asp:LinkButton ID="CreateNewRole_LinkButt" runat="server" PostBackUrl="~/aspx/manage/editRole.aspx?mode=create">Create new role</asp:LinkButton>
                 </td>
             </tr>
         </table>

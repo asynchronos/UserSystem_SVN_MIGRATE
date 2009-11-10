@@ -10,7 +10,7 @@
 </div>
 <asp:SqlDataSource ID="SqlDS_Menu" runat="server" 
     ConnectionString="<%$ ConnectionStrings:USERConnectionString %>" 
-    SelectCommand="P_GetMenuByRoles" onselecting="SqlDS_Menu_Selecting" 
+    SelectCommand="P_GetMenuByRolesAndAppName" onselecting="SqlDS_Menu_Selecting" 
     SelectCommandType="StoredProcedure">
     <SelectParameters>
         <asp:Parameter Name="roles" Type="String" />

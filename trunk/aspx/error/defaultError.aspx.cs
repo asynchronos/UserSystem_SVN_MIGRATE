@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace aspx.error
 {
-    public partial class defaultError : System.Web.UI.Page
+    public partial class defaultError : MyPageClass
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Literal_Error.Text = "Error:please contact administrator.";
+            Error_Label.Text = "Error : Please contact administrator.<br />"
+                + "Page : " + getQueryString("page")+"<br />"
+                + "Message : " + getQueryString("msg") + "<br />";
         }
     }
 }

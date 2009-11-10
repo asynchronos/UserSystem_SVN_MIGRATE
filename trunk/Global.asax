@@ -94,11 +94,16 @@
         //mail.BodyFormat = System.Web.Mail.MailFormat.Text;
         //mail.Body = ErrorMessage;
         //System.Web.Mail.SmtpMail.Send(mail);
-
+        
         //redirect to error page
         if (err.GetType().Equals(typeof(System.Security.SecurityException)))
         {
             Response.Redirect("~/aspx/error/unauthorized.aspx?page=" + Server.UrlEncode(Request.RawUrl));
+        }
+        else
+        {
+            Response.Redirect("~/aspx/error/defaultError.aspx?page=" + Server.UrlEncode(Request.RawUrl)
+                +"&msg=" + err.InnerException.Message);
         }
     }
 
