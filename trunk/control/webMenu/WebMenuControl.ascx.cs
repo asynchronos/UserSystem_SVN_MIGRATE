@@ -72,6 +72,27 @@ namespace control.webMenu
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string mm = (string)Session["MM"];
+            string ms = (string)Session["MS"];
+
+            //session ไม่มีค่า โหลดเมนูจาก Database
+            if (mm.Trim().Equals(string.Empty) || ms.Trim().Equals(string.Empty))
+            {
+                loadMenu();
+
+                Session.Add("MM", Literal_MM.Text);
+                Session.Add("MS", Literal_MS.Text);
+                
+            }
+            else
+            {
+                Literal_MM.Text = mm;
+                Literal_MS.Text = ms;
+            }
+        }
+
+        protected void loadMenu()
+        {
             FormsAuthenticationTicket authTicket = getAuthTicket();
 
             if (null != authTicket)
@@ -93,14 +114,13 @@ namespace control.webMenu
                     builder.Append(buildMainMenuString(mainMenuModel));
                 }
 
-
-
                 Literal_MM.Text = builder.ToString();
 
                 for (int i = 0; i < subMenu.Length; i++)
                 {
                     MenuModel subMenuModel = bindModel(subMenu[i]);
                     subMenus.Add(subMenuModel);
+
 
                     //วนลูป mainMenu เพื่อหา MenuRel ที่ตรงกับ MenuParentKey
                     for (int j = 0; j < mainMenus.Count; j++)
@@ -163,6 +183,7 @@ namespace control.webMenu
 
                 //add sub menu and start script
                 Literal_MS.Text = Literal_MS.Text + builder.ToString();
+
             }
         }
 

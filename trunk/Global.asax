@@ -103,7 +103,7 @@
         else
         {
             Response.Redirect("~/aspx/error/defaultError.aspx?page=" + Server.UrlEncode(Request.RawUrl)
-                +"&msg=" + err.InnerException.Message);
+                + "&msg=" + err.InnerException.Message);
         }
     }
 
@@ -142,9 +142,6 @@
                 
                 //Attach the new principal object to the current HttpContext object
                 Context.User = princ;
-                
-                //add new Expires to cookie
-                authCookie.Expires.AddMinutes(30);
             }
             else
             {

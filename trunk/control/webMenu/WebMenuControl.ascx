@@ -2,7 +2,7 @@
 
 <div class="chromestyle" id="chromemenu">
     <ul>
-        <asp:Literal ID="Literal_MM" runat="server" EnableViewState="false"></asp:Literal>
+        <asp:Literal ID="Literal_MM" runat="server" EnableViewState="true"></asp:Literal>
         <li id="LoginStatusMenu" runat="server" style="white-space: nowrap;">
             <asp:LoginStatus ID="LoginStatus" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/aspx/loginOut/logout.aspx" />
         </li>
@@ -19,4 +19,4 @@
     </SelectParameters>
 </asp:SqlDataSource>
 
-<asp:Literal ID="Literal_MS" runat="server" EnableViewState="false"></asp:Literal>
+<asp:Literal ID="Literal_MS" runat="server" EnableViewState="true"></asp:Literal>

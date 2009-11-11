@@ -54,6 +54,11 @@ namespace service.authen
                     {
                         log.Debug(userM.EMP_ID + "[" + userM.GetFullNameThai() + "]" + " has " + userM.RoleList.Count + " role(s).");
                     }
+
+                    //update last sign on date
+                    queryUser.FirstOrDefault<UserSystemDataClasses.TB_AUTHO_USER>().LAST_SIGN_ON_DATE = DateTime.Now;
+                    //summitChange
+                    userDB.SubmitChanges();
                 }
             }
 

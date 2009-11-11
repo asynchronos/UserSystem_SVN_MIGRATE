@@ -158,5 +158,38 @@ namespace aspx.manage
             e.Command.Parameters["@roles"].Value = getListBoxValues(ListBox_SelectedRole());
             e.Command.Parameters["@categoryKey"].Value = DDL_RoleCategory().SelectedValue;
         }
+        protected void UpdateButton_Click(object sender, EventArgs e)
+        {
+            DropDownList menuParentDDL = (DropDownList)Menu_FV.FindControl("MENU_PARENT_DDL");
+            HiddenField menuParentHF = (HiddenField)Menu_FV.FindControl("MENU_PARENT_HF");
+
+            if (menuParentDDL.SelectedValue.Trim().Equals(string.Empty))
+            {
+                menuParentHF.Value = "0";
+            }
+            else
+            {
+                menuParentHF.Value = menuParentDDL.SelectedValue;
+            }
+        }
+        protected void Menu_LinqDS_Updating(object sender, LinqDataSourceUpdateEventArgs e)
+        {
+            UserSystemDataClasses.TB_MENU tbMenu = (UserSystemDataClasses.TB_MENU)e.NewObject;
+
+            if (tbMenu.MENU_POPUP_OPT.Equals(String.Empty))
+            {
+                tbMenu.MENU_POPUP_OPT = null;
+            }
+
+            if (tbMenu.MENU_REL.Equals(String.Empty))
+            {
+                tbMenu.MENU_REL = null;
+            }
+
+            if (tbMenu.MENU_PARENT_KEY == 0)
+            {
+                tbMenu.MENU_PARENT_KEY = null;
+            }
+        }
     }
 }

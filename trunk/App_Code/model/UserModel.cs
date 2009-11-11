@@ -130,6 +130,10 @@ namespace model
             return result;
         }
 
+        /// <summary>
+        /// เอา ROLE_KEY ทั้งหมดของ User นี้มาต่อกันโดยคั่นด้วย |
+        /// </summary>
+        /// <returns>ROLE_KEY1|ROLE_KEY2|...|ROLE_KEYn</returns>
         public string getConcatRoleList()
         {
             string result = string.Empty;

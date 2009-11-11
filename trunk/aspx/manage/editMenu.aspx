@@ -53,6 +53,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="MENU_URLTextBox" runat="server" 
                                                                     Text='<%# Bind("MENU_URL") %>' />
+                                                                <asp:Label ID="MENU_URL_Ex_Label" runat="server" Text="Example : ~/aspx/manage/managePage.aspx"></asp:Label>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -62,6 +63,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="MENU_POPUP_OPTTextBox" runat="server" 
                                                                     Text='<%# Bind("MENU_POPUP_OPT") %>' />
+                                                                <asp:Label ID="MENU_POPUP_OPT_Ex_Label" runat="server" Text="Example : width=400,height=300"></asp:Label>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -71,6 +73,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="MENU_RELTextBox" runat="server" 
                                                                     Text='<%# Bind("MENU_REL") %>' />
+                                                                <asp:Label ID="MENU_REL_Ex_Label" runat="server" Text="Example : dropAdminMenu(ใส่ในกรณีที่ต้องการให้มีSubMenu)"></asp:Label>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -107,10 +110,10 @@
                                                             <td>
                                                                 <asp:DropDownList ID="MENU_PARENT_DDL" runat="server" 
                                                                     DataSourceID="MenuParent_SqlDS" DataTextField="MENU_TITLE" 
-                                                                    DataValueField="MENU_KEY" SelectedValue='<%# Bind("MENU_PARENT_KEY") %>'
+                                                                    DataValueField="MENU_KEY" SelectedValue='<%# Eval("MENU_PARENT_KEY") %>'
                                                                     AppendDataBoundItems="true">
                                                                     
-                                                                    <asp:ListItem Text="Null" Value=""></asp:ListItem>
+                                                                    <asp:ListItem Text="Null" Value="" Selected="True"></asp:ListItem>
 
                                                                 </asp:DropDownList>
                                                                 <asp:SqlDataSource ID="MenuParent_SqlDS" runat="server" 
@@ -121,12 +124,14 @@
                                                                             Type="Int32" />
                                                                     </SelectParameters>
                                                                 </asp:SqlDataSource>
+                                                                <asp:HiddenField ID="MENU_PARENT_HF" runat="server"
+                                                                    Value='<%# Bind("MENU_PARENT_KEY") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2">
                                                                 <asp:Button ID="UpdateButton" runat="server" Text="Update"
-                                                                    CausesValidation="True" CommandName="Update"/>
+                                                                    CausesValidation="True" CommandName="Update" onclick="UpdateButton_Click"/>
                                                                 <asp:Button ID="UpdateCancelButton" runat="server" Text="Cancel"
                                                                     CausesValidation="False" CommandName="Cancel"/>                                                         
                                                             </td>
@@ -350,7 +355,7 @@
                                             <asp:LinqDataSource ID="Menu_LinqDS" runat="server" 
                                                 ContextTypeName="UserSystemDataClasses.UserSystemDataClassesDataContext" 
                                                 EnableInsert="True" EnableUpdate="True" TableName="TB_MENUs" 
-                                                Where="MENU_KEY == @MENU_KEY">
+                                                Where="MENU_KEY == @MENU_KEY" OnUpdating="Menu_LinqDS_Updating">
                                                 <WhereParameters>
                                                     <asp:QueryStringParameter Name="MENU_KEY" QueryStringField="menuKey" 
                                                         Type="Int32" />

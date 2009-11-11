@@ -20,7 +20,37 @@ namespace aspx.loginout
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
+                FormsAuthenticationTicket authTicket = this.getAuthTicket();
 
+                //ถ้าถูก redirect มาหน้านี้แล้วมี ReturnUrl แสดงว่าไม่มีสิทธิ์ดูข้อมูลหน้าที่เรียกหรือ Server timeout
+                if (hasQueryString("ReturnUrl"))
+                {
+                    if (null != authTicket)
+                    {
+                        FailureText.Text = "คุณไม่มีสิทธิ์ในการดูข้อมูลนี้";
+                    }
+                    else
+                    {
+                        FailureText.Text = "คุณไม่ได้ใช้งานนานเกินกว่า 30 นาที<br />กรุณา Login ใหม่อีกครั้ง";
+                    }
+                }
+                else //แสดงว่าไม่ได้ถูก redirect มา
+                {
+                    //ทำการเคลียร์ cookie ที่ค้างอยู่(ถ้ามี)
+                    if (null != authTicket)
+                    {
+                        string username = authTicket.Name;
+
+                        FormsAuthentication.SignOut();
+                        Session.Abandon();
+                        Context.Request.Cookies.Clear();
+
+                        log.Info(username + " logout.");
+                    }
+                }
+            }
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
@@ -28,7 +58,7 @@ namespace aspx.loginout
             AuthenUser client = new AuthenUser();
             UserModel result = client.Authenticate(UserName.Text, Password.Text,
                 ConfigurationManager.AppSettings["APPLICATION_NAME"]);
-            
+
             if (null == result)
             {
                 FailureText.Text = "Authenticate fail : Invalid username or password";
@@ -39,7 +69,7 @@ namespace aspx.loginout
                 {
                     //Create the authentication ticket.
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                        1, result.EMP_ID, DateTime.Now, DateTime.Now.AddDays(1), false,
+                        1, result.EMP_ID, DateTime.Now, DateTime.Now.AddMinutes(30), false,
                         result.getConcatRoleList());
 
                     //Now encrypt the ticket.
@@ -48,7 +78,8 @@ namespace aspx.loginout
                     //Create a cookie and add the encrypted ticket to the cookie as data.
                     HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName,
                         encryptedTicket);
-                    authCookie.Expires = DateTime.Now.AddDays(1);
+                    //set authCookie Expires
+                    authCookie.Expires = authTicket.Expiration;
 
                     //Add the cookie to the outgoing cookies collection.
                     Response.Cookies.Add(authCookie);
@@ -69,5 +100,5 @@ namespace aspx.loginout
                 }
             }
         }
-}
+    }
 }
