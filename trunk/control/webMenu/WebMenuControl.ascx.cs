@@ -75,6 +75,16 @@ namespace control.webMenu
             string mm = (string)Session["MM"];
             string ms = (string)Session["MS"];
 
+            if (null == mm)
+            {
+                mm = string.Empty;
+            }
+
+            if (null == ms)
+            {
+                ms = string.Empty;
+            }
+
             //session ไม่มีค่า โหลดเมนูจาก Database
             if (mm.Trim().Equals(string.Empty) || ms.Trim().Equals(string.Empty))
             {
