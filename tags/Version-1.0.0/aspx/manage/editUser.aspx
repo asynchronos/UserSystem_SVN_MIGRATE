@@ -336,6 +336,9 @@
                                                             <td>
                                                                 EMP_NAME_E:
                                                             </td>
+                                                            <td>
+                                                                <asp:TextBox ID="EMP_NAME_ETextBox" runat="server" Text='<%# Bind("EMP_NAME_E") %>' Enabled="false" />
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
