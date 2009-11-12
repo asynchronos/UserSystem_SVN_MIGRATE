@@ -105,9 +105,6 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            
-                                                        </tr>
-                                                        <tr>
                                                             <td>
                                                                 CREATE_DATE:
                                                             </td>

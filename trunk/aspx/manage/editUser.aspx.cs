@@ -188,5 +188,5 @@ namespace aspx.manage
                 newObj.LAST_CHANGE_PASS_DATE = null;
             }
         }
-}
+    }
 }
