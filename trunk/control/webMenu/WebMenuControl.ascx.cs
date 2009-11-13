@@ -72,32 +72,36 @@ namespace control.webMenu
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string mm = (string)Session["MM"];
-            string ms = (string)Session["MS"];
-
-            if (null == mm)
+            //Only proceed if the user is authenticated
+            if (Request.IsAuthenticated)
             {
-                mm = string.Empty;
-            }
+                string mm = (string)Session["MM"];
+                string ms = (string)Session["MS"];
 
-            if (null == ms)
-            {
-                ms = string.Empty;
-            }
+                if (null == mm)
+                {
+                    mm = string.Empty;
+                }
 
-            //session ไม่มีค่า โหลดเมนูจาก Database
-            if (mm.Trim().Equals(string.Empty) || ms.Trim().Equals(string.Empty))
-            {
-                loadMenu();
+                if (null == ms)
+                {
+                    ms = string.Empty;
+                }
 
-                Session.Add("MM", Literal_MM.Text);
-                Session.Add("MS", Literal_MS.Text);
-                
-            }
-            else
-            {
-                Literal_MM.Text = mm;
-                Literal_MS.Text = ms;
+                //session ไม่มีค่า โหลดเมนูจาก Database
+                if (mm.Trim().Equals(string.Empty) || ms.Trim().Equals(string.Empty))
+                {
+                    loadMenu();
+
+                    Session.Add("MM", Literal_MM.Text);
+                    Session.Add("MS", Literal_MS.Text);
+
+                }
+                else
+                {
+                    Literal_MM.Text = mm;
+                    Literal_MS.Text = ms;
+                }
             }
         }
 

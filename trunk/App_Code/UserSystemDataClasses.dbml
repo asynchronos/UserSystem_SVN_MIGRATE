@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="USER" EntityNamespace="UserSystemDataClasses" ContextNamespace="UserSystemDataClasses" Class="UserSystemDataClassesDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=TNA17044\SQL_TNA17044;Initial Catalog=USER;Persist Security Info=True;User ID=userdb" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="USERConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=172.19.54.2;Initial Catalog=USER;Persist Security Info=True;User ID=userdb" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="USERConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TB_APPLICATION" Member="TB_APPLICATIONs">
     <Type Name="TB_APPLICATION">
       <Column Name="APP_KEY" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

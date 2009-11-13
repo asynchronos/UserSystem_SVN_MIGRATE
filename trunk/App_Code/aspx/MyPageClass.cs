@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using log4net;
 using System.Web.Security;
+using System.Data.SqlClient;
+using System.Configuration;
 
 /// <summary>
 /// Summary description for MyPageClass
@@ -25,7 +27,7 @@ namespace aspx
 
         }
 
-        public bool hasQueryString(String name)
+        protected bool hasQueryString(String name)
         {
             bool result = false;
 
@@ -37,11 +39,11 @@ namespace aspx
             return result;
         }
 
-        public String getQueryString(String name)
+        protected String getQueryString(String name)
         {
             String result = null;
 
-            if (hasQueryString(name))
+            if (this.hasQueryString(name))
             {
                 result = Request.QueryString[name];
             }
@@ -49,7 +51,7 @@ namespace aspx
             return result;
         }
 
-        public FormsAuthenticationTicket getAuthTicket()
+        protected FormsAuthenticationTicket getAuthTicket()
         {
             HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
             FormsAuthenticationTicket authTicket = null;
@@ -67,6 +69,34 @@ namespace aspx
             }
 
             return authTicket;
+        }
+
+        protected void logActivity(String action)
+        {
+            //Only proceed if the user is authenticated
+            if (Request.IsAuthenticated)
+            {
+                //Get information about the currently logged on user
+                if (null != User)
+                {
+                    //Call the P_UpdateUsersCurrentActivity
+                    using(SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["USERConnectionString"].ConnectionString))
+                    {
+                        SqlCommand myCommand = new SqlCommand("P_UpdateUsersCurrentActivity", myConn);
+                        myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        myCommand.Parameters.AddWithValue("@empId", User.Identity.Name);
+                        myCommand.Parameters.AddWithValue("@appKey", ConfigurationManager.AppSettings["APPLICATION_NAME"]);
+                        myCommand.Parameters.AddWithValue("@activity", action);
+                        myCommand.Parameters.AddWithValue("@activityDate", DateTime.Now);
+                        //myCommand.Parameters.AddWithValue("@activityDate", DateTime.UtcNow);
+
+                        myConn.Open();
+                        myCommand.ExecuteNonQuery();
+                        myConn.Close();
+                    }//end using
+                }
+            }
         }
     }
 }

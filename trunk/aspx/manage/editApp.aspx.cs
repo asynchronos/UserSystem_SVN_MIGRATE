@@ -114,13 +114,13 @@ namespace aspx.manage
         {
             if (!this.IsPostBack)
             {
-                if (hasQueryString("mode"))
+                if (this.hasQueryString("mode"))
                 {
-                    if (getQueryString("mode") == "create")
+                    if (this.getQueryString("mode") == "create")
                     {
                         App_FV.ChangeMode(FormViewMode.Insert);
                     }
-                    else if (getQueryString("mode") == "edit")
+                    else if (this.getQueryString("mode") == "edit")
                     {
                         App_FV.ChangeMode(FormViewMode.Edit);
                     }

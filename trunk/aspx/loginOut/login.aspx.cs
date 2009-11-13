@@ -25,7 +25,7 @@ namespace aspx.loginout
                 FormsAuthenticationTicket authTicket = this.getAuthTicket();
 
                 //ถ้าถูก redirect มาหน้านี้แล้วมี ReturnUrl แสดงว่าไม่มีสิทธิ์ดูข้อมูลหน้าที่เรียกหรือ Server timeout
-                if (hasQueryString("ReturnUrl"))
+                if (this.hasQueryString("ReturnUrl"))
                 {
                     if (null != authTicket)
                     {

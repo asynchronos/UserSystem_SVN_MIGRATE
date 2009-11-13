@@ -25,6 +25,7 @@ namespace aspx.loginOut
                 username = authTicket.Name;
 
                 FormsAuthentication.SignOut();
+                Session.Clear();
                 Session.Abandon();
                 Context.Request.Cookies.Clear();
 

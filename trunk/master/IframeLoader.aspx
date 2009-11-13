@@ -17,9 +17,9 @@
         <%
             String url = String.Empty;
         
-            if (hasQueryString("url"))
+            if (this.hasQueryString("url"))
             {
-                url = getQueryString("url");
+                url = this.getQueryString("url");
             }
             
             Response.Write("<script type=\"text/javascript\">\n");
