@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="service.authen.AuthenUser" CodeBehind="~/App_Code/service/authen/AuthenUser.cs" %>

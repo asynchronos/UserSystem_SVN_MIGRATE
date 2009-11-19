@@ -1,5 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/master/MasterPage.master" AutoEventWireup="true"
-    CodeFile="login.aspx.cs" Inherits="aspx.loginout.Login" %>
+    CodeFile="login.aspx.cs" Inherits="Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

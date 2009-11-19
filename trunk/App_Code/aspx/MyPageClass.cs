@@ -67,7 +67,7 @@ namespace aspx
             {
                 log.Error(ex.Message, ex);
             }
-
+            
             return authTicket;
         }
 
@@ -79,22 +79,13 @@ namespace aspx
                 //Get information about the currently logged on user
                 if (null != User)
                 {
-                    //Call the P_UpdateUsersCurrentActivity
-                    using(SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["USERConnectionString"].ConnectionString))
-                    {
-                        SqlCommand myCommand = new SqlCommand("P_UpdateUsersCurrentActivity", myConn);
-                        myCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    service.user.UserService uServ = new service.user.UserService();
 
-                        myCommand.Parameters.AddWithValue("@empId", User.Identity.Name);
-                        myCommand.Parameters.AddWithValue("@appKey", ConfigurationManager.AppSettings["APPLICATION_NAME"]);
-                        myCommand.Parameters.AddWithValue("@activity", action);
-                        myCommand.Parameters.AddWithValue("@activityDate", DateTime.Now);
-                        //myCommand.Parameters.AddWithValue("@activityDate", DateTime.UtcNow);
-
-                        myConn.Open();
-                        myCommand.ExecuteNonQuery();
-                        myConn.Close();
-                    }//end using
+                    uServ.updateUserActivity(User.Identity.Name
+                        , int.Parse(ConfigurationManager.AppSettings["APPLICATION_KEY"])
+                        , action
+                        , DateTime.Now // DateTime.UtcNow
+                    );
                 }
             }
         }

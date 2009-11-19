@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Text;
 using System.Web.Security;
 using log4net;
+using System.Configuration;
 
 namespace control.webMenu
 {
@@ -75,33 +76,27 @@ namespace control.webMenu
             //Only proceed if the user is authenticated
             if (Request.IsAuthenticated)
             {
-                string mm = (string)Session["MM"];
-                string ms = (string)Session["MS"];
 
-                if (null == mm)
+                try
                 {
-                    mm = string.Empty;
+                    Literal_MM.Text = (string)Session["MM"];
+                    Literal_MS.Text = (string)Session["MS"];
                 }
-
-                if (null == ms)
+                catch (Exception ex)
                 {
-                    ms = string.Empty;
+                    Literal_MM.Text = string.Empty;
+                    Literal_MS.Text = string.Empty;
                 }
 
                 //session ไม่มีค่า โหลดเมนูจาก Database
-                if (mm.Trim().Equals(string.Empty) || ms.Trim().Equals(string.Empty))
+                if (Literal_MM.Text.Trim().Equals(string.Empty) || Literal_MS.Text.Trim().Equals(string.Empty))
                 {
                     loadMenu();
-
                     Session.Add("MM", Literal_MM.Text);
                     Session.Add("MS", Literal_MS.Text);
 
                 }
-                else
-                {
-                    Literal_MM.Text = mm;
-                    Literal_MS.Text = ms;
-                }
+                
             }
         }
 
@@ -111,95 +106,113 @@ namespace control.webMenu
 
             if (null != authTicket)
             {
-                System.Data.DataView dv = (System.Data.DataView)SqlDS_Menu.Select(DataSourceSelectArguments.Empty);
 
-                List<MenuModel> mainMenus = new List<MenuModel>();
-                List<MenuModel> subMenus = new List<MenuModel>();
+                service.menu.MenuService menu = new service.menu.MenuService();
 
-                System.Data.DataRow[] mainMenu = dv.Table.Select("MENU_PARENT_KEY IS NULL", "MENU_PRIORITY ASC");
-                System.Data.DataRow[] subMenu = dv.Table.Select("MENU_PARENT_KEY IS NOT NULL", "MENU_PRIORITY ASC");
-
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < mainMenu.Length; i++)
-                {
-                    MenuModel mainMenuModel = bindModel(mainMenu[i]);
-                    mainMenus.Add(mainMenuModel);
-
-                    builder.Append(buildMainMenuString(mainMenuModel));
-                }
-
-                Literal_MM.Text = builder.ToString();
-
-                for (int i = 0; i < subMenu.Length; i++)
-                {
-                    MenuModel subMenuModel = bindModel(subMenu[i]);
-                    subMenus.Add(subMenuModel);
-
-
-                    //วนลูป mainMenu เพื่อหา MenuRel ที่ตรงกับ MenuParentKey
-                    for (int j = 0; j < mainMenus.Count; j++)
-                    {
-                        if (subMenuModel.menuParentKey.Equals(mainMenus[j].menuKey))
-                        {
-
-                            //เช็คว่า menuRel มีค่าหรือไม่
-                            if (mainMenus[j].menuRel != null)
-                            {
-                                System.Xml.XmlDocument subMenuXml = new System.Xml.XmlDocument();
-
-                                //load xml ของ sub menu มา
-                                if (!Literal_MS.Text.Equals(string.Empty))
-                                {
-                                    subMenuXml.LoadXml(Literal_MS.Text);
-                                }
-
-                                System.Xml.XmlNode xmlNode = subMenuXml.SelectSingleNode("//div[@id=\"" + mainMenus[j].menuRel + "\"]");
-
-                                System.Xml.XmlElement aElement = subMenuXml.CreateElement("a");
-                                aElement.SetAttribute("id", "Link_" + subMenuModel.menuKey.ToString());
-                                aElement.SetAttribute("title", subMenuModel.menuTooltip);
-                                if (subMenuModel.menuTarget == null)
-                                {
-                                    aElement.SetAttribute("rel", subMenuModel.menuRel);
-                                }
-                                else
-                                {
-                                    aElement.SetAttribute("target", subMenuModel.menuTarget);
-                                }
-                                //check ว่ามี popup หรือไม่
-                                if (subMenuModel.menuPopupOption != null)
-                                {
-                                    aElement.SetAttribute("onclick", "openPopup('menu_" + subMenuModel.menuKey + "_Popup', '"
-                                        + Page.ResolveUrl(subMenuModel.menuUrl) + "', false, '" + subMenuModel.menuPopupOption + "');");
-                                    aElement.SetAttribute("href", MenuModel.defaultUrl);
-                                }
-                                else
-                                {
-                                    //ไม่มี popup set href
-                                    aElement.SetAttribute("href", subMenuModel.menuUrl);
-                                }
-                                aElement.InnerText = subMenuModel.menuTitle;
-
-                                xmlNode.AppendChild(aElement);
-
-                                Literal_MS.Text = subMenuXml.InnerXml;
-                            }
-
-                            //ถ้าเจอที่ตรงกันแล้ว set sub menu เสร็จก็ break ได้เลย
-                            break;
-                        }
-                    }
-                }
-
-                //add start script
-                builder = new StringBuilder();
-                builder.Append("<script type=\"text/javascript\">cssdropdown.startchrome(\"chromemenu\");</script>");
-
-                //add sub menu and start script
-                Literal_MS.Text = Literal_MS.Text + builder.ToString();
+                Literal_MM.Text = menu.getMainMenu(authTicket.UserData
+                    , "|", ConfigurationManager.AppSettings["APPLICATION_NAME"], Page.ResolveUrl("~"));
+                Literal_MS.Text = menu.getSubMenu(authTicket.UserData
+                    , "|", ConfigurationManager.AppSettings["APPLICATION_NAME"], Page.ResolveUrl("~"));
 
             }
         }
+
+        //ใช้ผ่าน method เดียวกับ web service แทน
+        //protected void loadMenu2()
+        //{
+        //    FormsAuthenticationTicket authTicket = getAuthTicket();
+
+        //    if (null != authTicket)
+        //    {
+        //        System.Data.DataView dv = (System.Data.DataView)SqlDS_Menu.Select(DataSourceSelectArguments.Empty);
+
+        //        List<MenuModel> mainMenus = new List<MenuModel>();
+        //        List<MenuModel> subMenus = new List<MenuModel>();
+
+        //        System.Data.DataRow[] mainMenu = dv.Table.Select("MENU_PARENT_KEY IS NULL", "MENU_PRIORITY ASC");
+        //        System.Data.DataRow[] subMenu = dv.Table.Select("MENU_PARENT_KEY IS NOT NULL", "MENU_PRIORITY ASC");
+
+        //        StringBuilder builder = new StringBuilder();
+        //        for (int i = 0; i < mainMenu.Length; i++)
+        //        {
+        //            MenuModel mainMenuModel = bindModel(mainMenu[i]);
+        //            mainMenus.Add(mainMenuModel);
+
+        //            builder.Append(buildMainMenuString(mainMenuModel));
+        //        }
+
+        //        Literal_MM.Text = builder.ToString();
+
+        //        for (int i = 0; i < subMenu.Length; i++)
+        //        {
+        //            MenuModel subMenuModel = bindModel(subMenu[i]);
+        //            subMenus.Add(subMenuModel);
+
+
+        //            //วนลูป mainMenu เพื่อหา MenuRel ที่ตรงกับ MenuParentKey
+        //            for (int j = 0; j < mainMenus.Count; j++)
+        //            {
+        //                if (subMenuModel.menuParentKey.Equals(mainMenus[j].menuKey))
+        //                {
+
+        //                    //เช็คว่า menuRel มีค่าหรือไม่
+        //                    if (mainMenus[j].menuRel != null)
+        //                    {
+        //                        System.Xml.XmlDocument subMenuXml = new System.Xml.XmlDocument();
+
+        //                        //load xml ของ sub menu มา
+        //                        if (!Literal_MS.Text.Equals(string.Empty))
+        //                        {
+        //                            subMenuXml.LoadXml(Literal_MS.Text);
+        //                        }
+
+        //                        System.Xml.XmlNode xmlNode = subMenuXml.SelectSingleNode("//div[@id=\"" + mainMenus[j].menuRel + "\"]");
+
+        //                        System.Xml.XmlElement aElement = subMenuXml.CreateElement("a");
+        //                        aElement.SetAttribute("id", "Link_" + subMenuModel.menuKey.ToString());
+        //                        aElement.SetAttribute("title", subMenuModel.menuTooltip);
+        //                        if (subMenuModel.menuTarget == null)
+        //                        {
+        //                            aElement.SetAttribute("rel", subMenuModel.menuRel);
+        //                        }
+        //                        else
+        //                        {
+        //                            aElement.SetAttribute("target", subMenuModel.menuTarget);
+        //                        }
+        //                        //check ว่ามี popup หรือไม่
+        //                        if (subMenuModel.menuPopupOption != null)
+        //                        {
+        //                            aElement.SetAttribute("onclick", "openPopup('menu_" + subMenuModel.menuKey + "_Popup', '"
+        //                                + Page.ResolveUrl(subMenuModel.menuUrl) + "', false, '" + subMenuModel.menuPopupOption + "');");
+        //                            aElement.SetAttribute("href", MenuModel.defaultUrl);
+        //                        }
+        //                        else
+        //                        {
+        //                            //ไม่มี popup set href
+        //                            aElement.SetAttribute("href", subMenuModel.menuUrl);
+        //                        }
+        //                        aElement.InnerText = subMenuModel.menuTitle;
+
+        //                        xmlNode.AppendChild(aElement);
+
+        //                        Literal_MS.Text = subMenuXml.InnerXml;
+        //                    }
+
+        //                    //ถ้าเจอที่ตรงกันแล้ว set sub menu เสร็จก็ break ได้เลย
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+        //        //add start script
+        //        builder = new StringBuilder();
+        //        builder.Append("<script type=\"text/javascript\">cssdropdown.startchrome(\"chromemenu\");</script>");
+
+        //        //add sub menu and start script
+        //        Literal_MS.Text = Literal_MS.Text + builder.ToString();
+
+        //    }
+        //}
 
         protected Object getDbValue(System.Data.DataRow dr,string columnName)
         {
@@ -352,6 +365,24 @@ namespace control.webMenu
             }
 
             return authTicket;
+        }
+
+        protected void LoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            string username = string.Empty;
+            FormsAuthenticationTicket authTicket = this.getAuthTicket();
+
+            if (null != authTicket)
+            {
+                username = authTicket.Name;
+
+                FormsAuthentication.SignOut();
+                Session.RemoveAll();
+                Session.Abandon();
+                Context.Request.Cookies.Clear();
+
+                log.Info(username + " logout.");
+            }
         }
 }
 }

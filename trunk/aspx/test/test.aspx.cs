@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using service.authen;
+using service.user;
 using model;
 
 namespace aspx.test
@@ -13,7 +13,7 @@ namespace aspx.test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AuthenUser client = new AuthenUser();
+            UserService client = new UserService();
             //client.Authenticate("249888", "249888");
             //List<UserSystemModel.TB_AUTHO_USER> user = (List<UserSystemModel.TB_AUTHO_USER>)client.Authenticate("249888", "249888");
 

@@ -19,13 +19,16 @@ namespace aspx.loginOut
         {
             string username = string.Empty;
             FormsAuthenticationTicket authTicket = this.getAuthTicket();
-
+            
             if (null != authTicket)
             {
                 username = authTicket.Name;
 
                 FormsAuthentication.SignOut();
-                Session.Clear();
+                
+                Session.Remove("MM");
+                Session.Remove("MS");
+                Session.RemoveAll();
                 Session.Abandon();
                 Context.Request.Cookies.Clear();
 
