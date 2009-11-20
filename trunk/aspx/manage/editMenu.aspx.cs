@@ -116,11 +116,11 @@ namespace aspx.manage
             {
                 if (this.hasQueryString("mode"))
                 {
-                    if (this.getQueryString("mode") == "create")
+                    if (this.getQueryString("mode").Equals("create"))
                     {
                         Menu_FV.ChangeMode(FormViewMode.Insert);
                     }
-                    else if (this.getQueryString("mode") == "edit")
+                    else if (this.getQueryString("mode").Equals("edit"))
                     {
                         Menu_FV.ChangeMode(FormViewMode.Edit);
                     }
@@ -204,7 +204,7 @@ namespace aspx.manage
             {
                 tbMenu.MENU_REL = null;
             }
-
+            
             if (tbMenu.MENU_PARENT_KEY == 0)
             {
                 tbMenu.MENU_PARENT_KEY = null;
