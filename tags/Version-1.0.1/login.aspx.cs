@@ -82,15 +82,14 @@ public partial class Login : aspx.MyPageClass
                 //Add the cookie to the outgoing cookies collection.
                 Response.Cookies.Add(authCookie);
 
-                //Redirect the user to the originally requested page
-                Response.Redirect(FormsAuthentication.GetRedirectUrl(result.EMP_ID, false));
-
                 //Insert Log
                 if (isDebugEnabled)
                 {
                     log.Info(result.EMP_ID + " login.");
                 }
 
+                //Redirect the user to the originally requested page
+                Response.Redirect(FormsAuthentication.GetRedirectUrl(result.EMP_ID, false));
             }
             else
             {
