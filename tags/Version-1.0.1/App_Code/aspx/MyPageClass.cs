@@ -73,21 +73,25 @@ namespace aspx
 
         protected void logActivity(String action)
         {
-            //Only proceed if the user is authenticated
-            if (Request.IsAuthenticated)
-            {
-                //Get information about the currently logged on user
-                if (null != User)
-                {
-                    service.user.UserService uServ = new service.user.UserService();
-
-                    uServ.updateUserActivity(User.Identity.Name
-                        , int.Parse(ConfigurationManager.AppSettings["APPLICATION_KEY"])
-                        , action
-                        , DateTime.Now // DateTime.UtcNow
-                    );
-                }
+            String empId = String.Empty;
+            if (null != User) {
+                empId = User.Identity.Name;
+            }else{
+                empId = this.getAuthTicket().Name;
             }
+
+            logActivity(empId, action);
+        }
+
+        protected void logActivity(String empId ,String action)
+        {
+            service.user.UserService uServ = new service.user.UserService();
+
+            uServ.updateUserActivity(empId
+                , int.Parse(ConfigurationManager.AppSettings["APPLICATION_KEY"])
+                , action
+                , DateTime.Now // DateTime.UtcNow
+            );
         }
     }
 }
