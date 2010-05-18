@@ -202,7 +202,7 @@ namespace service.user
                                     };
 
                 RoleModel roleM = null;
-                foreach (var role in queryRoleList)
+                foreach (var role in queryRoleList.Distinct())
                 {
                     roleM = new RoleModel();
 
