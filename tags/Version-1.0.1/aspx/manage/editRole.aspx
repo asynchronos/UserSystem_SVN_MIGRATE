@@ -97,8 +97,7 @@
                                                                 ROLE_KEY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Bind("ROLE_DESC") %>'
-                                                                    Enabled="false" />
+                                                                <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Bind("ROLE_DESC") %>' />
                                                             </td>
                                                         </tr>
                                                         <tr>
