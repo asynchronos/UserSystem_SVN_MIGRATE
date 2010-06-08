@@ -137,7 +137,7 @@ namespace model
         public string getConcatRoleList()
         {
             string result = string.Empty;
-            
+
             foreach (RoleModel role in this.RoleList)
             {
                 result = result + DELIMITER + role.ROLE_KEY;
@@ -147,6 +147,11 @@ namespace model
             result = result.Substring(1);
 
             return result;
+        }
+
+        public override string ToString()
+        {
+            return this.EMP_ID + ":" + this.GetFullNameEng + ":" + this.getConcatRoleList();
         }
     }
 }
