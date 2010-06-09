@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" CodeFile="Iframe.master.cs" Inherits="aspx.Iframe" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <script id="initFnSetHeight" type="text/javascript">
+        function goSetWidthHeight() {
+            var iframes = window.parent.Ext.select("iframe");
+            
+            for (i = 0; i < iframes.getCount(); i++) {
+                iframes.item(i).dom.height = iframes.item(i).dom.contentWindow.document.body.offsetHeight;
+                iframes.item(i).dom.width = iframes.item(i).dom.contentWindow.document.body.offsetWidth;
+            }
+        }
+    </script>
+</head>
+<body id="iframeBody" style="overflow: hidden;">
+    <form id="form1" runat="server">
+        <asp:ContentPlaceHolder ID="ScriptPlaceHolder" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
+
+<script id="callHeightScript" type="text/javascript">
+    //ส่ง id ของ iframe ไปยัง function
+    goSetWidthHeight();
+</script>
