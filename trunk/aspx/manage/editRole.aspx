@@ -34,7 +34,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Eval("ROLE_DESC") %>'
-                                                                    Enabled="false" />
+                                                                    onfocus="this.blur();" />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -97,7 +97,8 @@
                                                                 ROLE_KEY:
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Bind("ROLE_DESC") %>' />
+                                                                <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Bind("ROLE_DESC") %>'
+                                                                    onfocus="this.blur();" />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -148,7 +149,7 @@
                                                                 <asp:Button ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert"
                                                                     Text="Insert" />
                                                                 <asp:Button ID="InsertCancelButton" runat="server" CausesValidation="False"
-                                                                    CommandName="Cancel" Text="Cancel" />
+                                                                    CommandName="Cancel" Text="Cancel" onclick="InsertCancelButton_Click" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -161,7 +162,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="ROLE_KEYTextBox" runat="server" Text='<%# Eval("ROLE_DESC") %>'
-                                                                    Enabled="false" />
+                                                                    onfocus="this.blur();" />
                                                             </td>
                                                         </tr>
                                                         <tr>

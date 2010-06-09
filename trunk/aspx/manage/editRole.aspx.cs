@@ -35,5 +35,13 @@ namespace aspx.manage
         {
             Response.Redirect(Page.ResolveUrl("~/aspx/manage/editRole.aspx") + "?roleKey=" + ((TextBox)Role_FV.FindControl("ROLE_KEYTextBox")).Text);
         }
+
+        protected void InsertCancelButton_Click(object sender, EventArgs e)
+        {
+            //if don't have roleKey in query string
+            if (!this.hasQueryString("roleKey")){
+                Response.Redirect(Page.ResolveUrl("~/aspx/manage/manageRoles.aspx"));
+            }
+        }
     }
 }
