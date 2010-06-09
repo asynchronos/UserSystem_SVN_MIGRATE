@@ -1,0 +1,513 @@
+﻿.aa td:hover
+{
+    color: orange;
+    text-decoration: underline;
+}
+.allBorders
+{
+}
+.appHeader
+{
+    background-image: url(images/topGradRepeat.jpg);
+    background-repeat: repeat-x;
+}
+.blueRepeat
+{
+    background-image: url(images/darkBlue_GRAD.jpg);
+    background-repeat: repeat-x;
+}
+.bodyText
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.bodyTextLeftPadding
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 10px;
+}
+.bodyTextLowPadding
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.9em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 10px;
+}
+.bodyTextLowPaddingSelected
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    font-size: 0.9em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 10px;
+}
+.bodyTextNoPadding
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+}
+.bodyTextNoTopPadding
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+}
+.bodyTextLowTopPadding
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 3px;
+}
+.bodyTextLeftPadding5
+{
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 5px;
+}
+.bottomRow
+{
+    background-color: #3266CC;
+    font-family: tahoma;
+    padding-left: 30px;
+}
+.button0
+{
+    color: black;
+    font-family: Trebuchet MS;
+    font-size: 0.6em;
+}
+.button1
+{
+    color: black;
+    font-family: Trebuchet MS;
+    font-size: 0.6em;
+    text-decoration: underline;
+}
+.buttonCell
+{
+    background-color: #FEE17B;
+    padding-right: 20px;
+}
+.buttonRow
+{
+    padding-left: 30px;
+}
+.callOutStyle
+{
+    background-color: #6699CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 150%;
+}
+.callOutHeaderStyle
+{
+    background-color: #6699CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 150%;
+    padding-left: 7px;
+}
+.callOutStyleLowLeftPadding
+{
+    background-color: #6699CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 150%;
+    padding: 3px 20px 3px 15px;
+}
+.callOutStyleNoLeftPadding
+{
+    background-color: #6699CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 150%;
+    padding-bottom: 3px;
+    padding-right: 20px;
+    padding-top: 3px;
+}
+.callOutStyleNoBorder
+{
+    background-color: #6699CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 150%;
+    padding: 3px 20px 3px 30px;
+}
+.darkBlueShadow
+{
+    background-image: url(images/gradient_onblue.gif);
+    background-repeat: repeat-x;
+}
+.deSTabLeft
+{
+    background-color: #DEEAF3;
+    background-image: url(images/DeSelectedTab_1x1.gif);
+    background-position: 0 0;
+    background-repeat: repeat-y;
+    border-collapse: separate;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    border-top: 0 solid #6699CC;
+}
+.deSTabCenter
+{
+    background-color: #DEEAF3;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    color: #000000;
+    font-family: tahoma;
+    font-size: 0.7em;
+    font-weight: normal;
+    padding-bottom: 2px;
+}
+.deSTabRight
+{
+    background-color: #DEEAF3;
+    background-image: url(images/DeSelectedTab_1x1.gif);
+    background-position: right top;
+    background-repeat: repeat-y;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    border-top: 0 solid #6699CC;
+}
+.gridRowStyle
+{
+    background-color: #FFFFFF;
+    color: black;
+    font-family: tahoma;
+    font-size: 0.7em;
+    letter-spacing: 0;
+    padding: 3px 20px 3px 30px;
+}
+.gridRowStyle8
+{
+    background-color: #FFFFFF;
+    color: black;
+    font-family: tahoma;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    padding: 3px 20px 3px 30px;
+}
+.gridPagerStyle
+{
+    background-color: #EEEEEE;
+    color: #000000;
+    font-size: 0.7em;
+    padding: 3px 20px 3px 30px;
+}
+.gridAlternatingRowStyle
+{
+    background-color: #CADBED;
+    color: black;
+    font-family: tahoma;
+    font-size: 0.7em;
+    letter-spacing: 0;
+    padding: 3px 20px 3px 30px;
+}
+.gridAlternatingRowStyle8
+{
+    background-color: #CADBED;
+    color: black;
+    font-family: tahoma;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    padding: 3px 20px 3px 30px;
+}
+.gridSelectedRowStyle
+{
+    background-color: #3266CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.7em;
+    letter-spacing: 0;
+    padding: 3px 20px 3px 30px;
+}
+.helloUser
+{
+    font-weight: bold;
+}
+.hide
+{
+    visibility: hidden;
+}
+.homePageContent
+{
+    padding: 5px;
+}
+.homePageFooter
+{
+    border-left: 0 solid #FFFFFF;
+    border-right: 0 solid #FFFFFF;
+    border-top: 0 solid #FFFFFF;
+}
+.homePageHeader
+{
+    background-image: url(images/headerGRADIENT_Tall.gif);
+    background-position: left top;
+    background-repeat: repeat-x;
+}
+.hoverTabLeft
+{
+    background-color: #FFEBA6;
+    background-image: url(images/DeSelectedTab_1x1.gif);
+    background-position: 0 0;
+    background-repeat: repeat-y;
+    border-collapse: separate;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    border-top: 0 solid #6699CC;
+}
+.hoverTabCenter
+{
+    background-color: #FFEBA6;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    color: #000000;
+    font-family: tahoma;
+    font-size: 0.7em;
+    font-weight: normal;
+    padding-bottom: 2px;
+}
+.hoverTabRight
+{
+    background-color: #FFEBA6;
+    background-image: url(images/DeSelectedTab_1x1.gif);
+    background-position: right top;
+    background-repeat: repeat-y;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    border-top: 0 solid #6699CC;
+}
+.itemDetailsContainer
+{
+    background-color: #EEEEEE;
+}
+.lbBorders
+{
+}
+.lightShadow
+{
+    background-image: url(images/gradient_onwhite.gif);
+    background-repeat: repeat-x;
+}
+.lrbBorders
+{
+}
+.leftWizard
+{
+    background-color: #3266CC;
+    color: white;
+    font-family: tahoma;
+    font-size: 0.9em;
+    padding-left: 3px;
+    padding-right: 5px;
+    padding-top: 10px;
+}
+.logOff
+{
+    color: white;
+    font-family: tahoma;
+    font-size: 0.7em;
+    font-weight: normal;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: underline;
+}
+.logoText
+{
+    color: white;
+    font-family: tahoma;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.selTabLeft
+{
+    background-color: #FFFFFF;
+    background-image: url(images/selectedTab_1x1.gif);
+    background-position: left top;
+    background-repeat: repeat-y;
+    border-color: #6699CC #6699CC #FFFFFF;
+    border-style: solid;
+    border-width: 0;
+    cursor: default;
+}
+.selTabCenter
+{
+    background-color: #FFFFFF;
+    border-bottom: 0 solid #FFFFFF;
+    border-left: 0 solid #6699CC;
+    border-right: 0 solid #6699CC;
+    color: #000000;
+    cursor: default;
+    font-family: tahoma;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+.selTabRight
+{
+    background-color: #FFFFFF;
+    background-image: url(images/selectedTab_1x1.gif);
+    background-position: right top;
+    background-repeat: repeat-y;
+    border-color: #6699CC #6699CC #FFFFFF;
+    border-style: solid;
+    border-width: 0;
+    cursor: default;
+}
+.spacerTab
+{
+    background-color: transparent;
+}
+.userDetails
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.userDetailsLowLeftPadding
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    font-size: 0.7em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.userDetailsWithFontSize
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.webToolBrand
+{
+    color: #FFFFFF;
+    font-family: Franklin Gothic Medium;
+    left: -1px;
+    position: relative;
+    top: -2px;
+}
+.WelcomeText
+{
+    color: white;
+    font-family: tahoma;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+.wizardClass
+{
+    padding-left: 30px;
+    padding-top: 30px;
+}
+.wizardClassNoWatermark
+{
+    font-family: verdana;
+    font-size: 0.9em;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+a.helpHyperLink:hover
+{
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 0.7em;
+}
+a.helpHyperLink:link
+{
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 0.7em;
+}
+a.helpHyperLink:visited
+{
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 0.7em;
+}
+a.gridSelectedRowStyle:visited
+{
+    color: white;
+}
+a.gridSelectedRowStyle:link
+{
+    color: white;
+}
+.activeBTNImage
+{
+}
+.helperText
+{
+    color: white;
+    font-family: verdana;
+    font-size: 0.7em;
+    font-weight: bold;
+    position: relative;
+    text-decoration: underline;
+    top: -5px;
+}
+.divDetailsWithFontSize
+{
+    background-color: #EEEEEE;
+    color: black;
+    font-family: verdana;
+    font-size: 0.8em;
+    letter-spacing: 0;
+    line-height: 150%;
+    padding-left: 30px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
