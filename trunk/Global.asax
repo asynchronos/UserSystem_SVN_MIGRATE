@@ -4,6 +4,7 @@
 <%@ Import Namespace="System.Web.SessionState" %>
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="log4net" %>
+<%@ Import Namespace="System.Net" %>
 
 <script RunAt="server">
     private static readonly ILog log = LogManager.GetLogger(
@@ -63,7 +64,18 @@
         RegisterRoutes(RouteTable.Routes);
 
         //load log4net config(start once only)
-        log4net.Config.XmlConfigurator.Configure();
+        //config in web.config
+        //log4net.Config.XmlConfigurator.Configure();
+        
+        //config from file
+        //log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo(@"C:\log4netConfig.xml"));
+        
+        //load config from url
+        WebRequest myWebRequest = WebRequest.Create("http://leader1/UserSystem/log4netconfig.xml");
+        myWebRequest.Timeout = 5000;
+
+        WebResponse myWebResponse = myWebRequest.GetResponse();
+        log4net.Config.XmlConfigurator.Configure(myWebResponse.GetResponseStream());
     }
 
     void Application_Error(object sender, EventArgs e)
@@ -71,16 +83,16 @@
         Exception err = Server.GetLastError();
 
         //Creation of event log if it does not exist
-        String EventLogName = "UserSystem";
-        if (!EventLog.SourceExists(EventLogName))
+        String eventLogName = ConfigurationManager.AppSettings["APPLICATION_NAME"];
+        if (!EventLog.SourceExists(eventLogName))
         {
-            EventLog.CreateEventSource(EventLogName, EventLogName);
+            EventLog.CreateEventSource(eventLogName, eventLogName);
         }
 
         //Inserting into event log
-        EventLog Log = new EventLog();
-        Log.Source = EventLogName;
-        Log.WriteEntry(err.ToString(), EventLogEntryType.Error);
+        EventLog eLog = new EventLog();
+        eLog.Source = eventLogName;
+        eLog.WriteEntry(err.ToString(), EventLogEntryType.Error);
 
         //Insert log by log4net
         log.Error(err.Message, err);
@@ -117,18 +129,7 @@
             if (null != authCookie)
             {
                 FormsAuthenticationTicket authTicket = null;
-                try
-                {
-                    authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-                }
-                catch (ArgumentException argEx)
-                {
-                    log.Error(argEx.Message, argEx);
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex.Message, ex);
-                }
+                authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
                 //When the ticket was created, 
                 //the UserData property was assigned a pipe delimited string of role names.
@@ -145,9 +146,8 @@
             }
             else
             {
-                log.Error("authCookie is null");
+                throw new Exception("authCookie is null");
             }
         }
     }
 </script>
-
