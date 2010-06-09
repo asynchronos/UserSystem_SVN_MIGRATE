@@ -53,21 +53,25 @@ namespace aspx
 
         protected FormsAuthenticationTicket getAuthTicket()
         {
-            HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
             FormsAuthenticationTicket authTicket = null;
-            try
+            HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (null != authCookie)
             {
-                authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                try
+                {
+                    authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                }
+                catch (ArgumentException argEx)
+                {
+                    log.Error(argEx.Message, argEx);
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message, ex);
+                }
             }
-            catch (ArgumentException argEx)
-            {
-                log.Error(argEx.Message, argEx);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message, ex);
-            }
-            
+
             return authTicket;
         }
 
