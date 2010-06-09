@@ -71,7 +71,7 @@
         //log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo(@"C:\log4netConfig.xml"));
         
         //load config from url
-        WebRequest myWebRequest = WebRequest.Create("http://localhost:1437/UserSystem/log4netconfig.xml");
+        WebRequest myWebRequest = WebRequest.Create("http://localhost/UserSystem/log4netconfig.xml");
         myWebRequest.Timeout = 5000;
 
         WebResponse myWebResponse = myWebRequest.GetResponse();
