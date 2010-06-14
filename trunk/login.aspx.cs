@@ -36,23 +36,27 @@ public partial class Login : aspx.MyPageClass
             }
             else //แสดงว่าไม่ได้ถูก redirect มา
             {
-                //ทำการเคลียร์ cookie ที่ค้างอยู่(ถ้ามี)
-                if (null != authTicket)
-                {
-                    string username = authTicket.Name;
-
-                    FormsAuthentication.SignOut();
-                    Session.Abandon();
-                    Context.Request.Cookies.Clear();
-
-                    log.Info(username + " logout.");
-                }
+                //do nothing
             }
         }
     }
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
+        FormsAuthenticationTicket authTicket = this.getAuthTicket();
+        //ทำการเคลียร์ cookie ที่ค้างอยู่(ถ้ามี)
+        if (null != authTicket)
+        {
+            string username = authTicket.Name;
+
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            Context.Request.Cookies.Clear();
+
+            log.Info(username + " logout.");
+        }
+
+        //processing login
         UserService client = new UserService();
         UserModel result = client.Authenticate(UserName.Text, Password.Text,
             ConfigurationManager.AppSettings["APPLICATION_NAME"]);
@@ -77,7 +81,7 @@ public partial class Login : aspx.MyPageClass
                 roles = roles.Substring(1);
 
                 //Create the authentication ticket.
-                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+                authTicket = new FormsAuthenticationTicket(
                     1, result.EMP_ID, DateTime.Now, DateTime.Now.AddMinutes(30), false,
                     roles);
 

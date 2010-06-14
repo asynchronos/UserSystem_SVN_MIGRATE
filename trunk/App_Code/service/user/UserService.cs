@@ -333,6 +333,36 @@ namespace service.user
             return result;
         }
 
+        public bool changePassword(string empId, string oldPass, string newPass)
+        {
+            bool result = false;
+
+            using (UserSystemDataClasses.UserSystemDataClassesDataContext userDB
+                = new UserSystemDataClasses.UserSystemDataClassesDataContext())
+            {
+                var queryUser = from user in userDB.TB_AUTHO_USERs
+                                where user.EMP_ID == empId
+                                && user.PASSWD == oldPass
+                                select user;
+
+                if (!(queryUser.FirstOrDefault<UserSystemDataClasses.TB_AUTHO_USER>() == null))
+                {
+                    //update new password
+                    queryUser.FirstOrDefault<UserSystemDataClasses.TB_AUTHO_USER>().PASSWD = newPass;
+                    //summitChange
+                    userDB.SubmitChanges();
+                    result = true;
+
+                    if (isDebugEnabled)
+                    {
+                        log.Debug(empId + " change password success.");
+                    }
+                }
+            }
+
+            return result;
+        }
+
         #endregion
     }
 }

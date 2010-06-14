@@ -30,5 +30,7 @@ namespace service.user
         [OperationContract]
         int updateUserActivity(string empId, int appKey, string activity, DateTime activityDate);
 
+        [OperationContract]
+        bool changePassword(string empId, string oldPass, string newPass);
     }
 }
